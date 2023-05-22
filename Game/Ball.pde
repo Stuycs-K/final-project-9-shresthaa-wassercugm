@@ -5,58 +5,65 @@ public class Ball {
   //note: cueball has m = 0.17
   // double friction;
   //when moving cueball = up to 0.7!
-  // boolean onBoard = true;
+  boolean onBoard = true;
 
 
   public Ball(int x, int y) { //constructor
     pos = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, 0);
-    float r = random(255);
-    float g = random(255);
-    float b = random(255);
-    /*if (g > (r+b)*3/2) {
-      g = g/2;
-    }*/
-    if(col == color(41,163,33)){
-      col = color(244,7,7);
+    /*float r = random(255);
+     float g = random(255);
+     float b = random(255);
+     if (g > (r+b)*3/2) {
+     g = g/2;
+     }*/
+    col = color(random(255), random(255), random(255));
+    if (col == color(41, 163, 33)) {
+      col = color(244, 7, 7);
     }
-    //restrict green color from appearing and camouflage into background??
-    col = color(r,b,g);
+    //restrict green color from appearing and camouflage into background
   }
 
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
-    //friction = 0.06; //ignore for mvp
+    //friction = 0.06; //ignore friction for mvp
+    
   }
 
   void move() {
     pos.x += vel.x; //speed
     pos.y += vel.y;
-    if(pos.x>=width-border-r||pos.x<=border+r){ //bounce
+    if (pos.x>=width-border-r||pos.x<=border+r) { //bounce
       vel.x *= -1;
-      //acceleration here
+      //acceleration/deceleration here w/ impact of wall on velocity
     }
-    if(pos.y>=height-border-r||pos.y<=border+r){
+    if (pos.y>=height-border-r||pos.y<=border+r) {
       vel.y *= -1;
       //accelerate!
     }
+    //applyFriction();
   }
 
   void applyFriction() {
   }
 
   void getShape() {
-    fill(col);
-    noStroke();
-    circle(pos.x, pos.y, (float)r*2);
+    if (onBoard) {
+      fill(col);
+      stroke(0);
+      circle(pos.x, pos.y, (float)r*2);
+      noStroke();
+      noFill();
+    }
   }
 
   void goal() {
+    onBoard = false;
   }
 
-  void removeBall() {
-
-  }
+/*  void removeBall() {
+  //use onBoard in getShape, unnecessary?
+  }*/
 
 
   PVector getP() {

@@ -1,17 +1,17 @@
 # Work Log
 
-## GROUP MEMBER 1
+## Anna
 
-### date x
+### 5/22/23
 
-info
+Created the files
 
 ### date y
 
 info
 
 
-## GROUP MEMBER 2
+## Maya
 
 ### date x
 

@@ -2,8 +2,6 @@ public class Ball {
   PVector pos, vel, acc;
   color col;
   // int numBall;
-  final double r = 16;
-  final double m = 0.16; //kilograms
   //note: cueball has m = 0.17
   // double friction;
   //when moving cueball = up to 0.7!

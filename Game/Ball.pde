@@ -1,16 +1,16 @@
-public abstract class Ball {
+public class Ball {
   PVector pos, vel, acc;
   color col;
-  int numBall;
+  // int numBall;
   final double r = 16;
   final double m = 0.16; //kilograms
   //note: cueball has m = 0.17
-  double friction;
+  // double friction;
   //when moving cueball = up to 0.7!
-  boolean onBoard = true;
+  // boolean onBoard = true;
   
 
-  void Ball(int x, int y) { //constructor
+  public Ball(int x, int y) { //constructor
     pos = new PVector(x,y);
     vel = new PVector(0,0);
     acc = new PVector(0,0);

@@ -6,18 +6,24 @@ public class Ball {
   // double friction;
   //when moving cueball = up to 0.7!
   // boolean onBoard = true;
-  
+
 
   public Ball(int x, int y) { //constructor
-    pos = new PVector(x,y);
-    vel = new PVector(0,0);
-    acc = new PVector(0,0);
-    col = color(random(255), random(255), random(255));
+    pos = new PVector(x, y);
+    vel = new PVector(0, 0);
+    acc = new PVector(0, 0);
+    color r = color(random(255));
+    color g = color(random(255));
+    color b = color(random(255));
+    if (g > 200 && (r+b) < 200) {
+      g = color(200);
+    }
+    //restrict green color from appearing and camouflage into background
+    col = color(r, g, b);
   }
 
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
     //friction = 0.06; //ignore for mvp
-    
   }
 
   void move() {
@@ -31,24 +37,19 @@ public class Ball {
     noStroke();
     circle(pos.x, pos.y, (float)r*2);
   }
-  
-  void goal(){
-    
+
+  void goal() {
   }
-  
-  void removeBall(){
-    
+
+  void removeBall() {
   }
-  
+
 
   PVector getP() {
     return pos;
   }
-  
+
   PVector getV() {
     return vel;
   }
-  
-  
-  
 }

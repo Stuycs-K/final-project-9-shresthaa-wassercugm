@@ -12,14 +12,17 @@ public class Ball {
     pos = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, 0);
-    color r = color(random(255));
-    color g = color(random(255));
-    color b = color(random(255));
-    if (g > 200 && (r+b) < 200) {
-      g = color(200);
+    float r = random(255);
+    float g = random(255);
+    float b = random(255);
+    /*if (g > (r+b)*3/2) {
+      g = g/2;
+    }*/
+    if(col == color(41,163,33)){
+      col = color(244,7,7);
     }
-    //restrict green color from appearing and camouflage into background
-    col = color(r, g, b);
+    //restrict green color from appearing and camouflage into background??
+    col = color(r,b,g);
   }
 
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
@@ -27,6 +30,16 @@ public class Ball {
   }
 
   void move() {
+    pos.x += vel.x; //speed
+    pos.y += vel.y;
+    if(pos.x>=width-border-r||pos.x<=border+r){ //bounce
+      vel.x *= -1;
+      //acceleration here
+    }
+    if(pos.y>=height-border-r||pos.y<=border+r){
+      vel.y *= -1;
+      //accelerate!
+    }
   }
 
   void applyFriction() {
@@ -42,6 +55,7 @@ public class Ball {
   }
 
   void removeBall() {
+
   }
 
 

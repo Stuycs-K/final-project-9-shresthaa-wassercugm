@@ -14,9 +14,9 @@ info
 
 ## Maya
 
-### date x
+### 5/22/23
 
-info
+Started working on the setup() in Game for pool table graphics
 
 ### date y
 

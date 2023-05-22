@@ -4,7 +4,8 @@
 
 ### 5/22/23
 
-Created the files
+1. Created the files
+2. Created all variables in ball, and outline of methods
 
 ### date y
 

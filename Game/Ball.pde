@@ -1,7 +1,9 @@
 public class Ball {
   PVector pos, vel, acc;
+  //default acc = (0.1,0.1)
   color col;
   // int numBall;
+  // restrict numBall so doesn't overflow for mvp
   //note: cueball has m = 0.17
   // double friction;
   //when moving cueball = up to 0.7!
@@ -10,7 +12,7 @@ public class Ball {
 
   public Ball(int x, int y) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(0, 0);
+    vel = new PVector(0.5, 0.5);
     acc = new PVector(0, 0);
     /*float r = random(255);
      float g = random(255);
@@ -25,24 +27,31 @@ public class Ball {
     //restrict green color from appearing and camouflage into background
   }
 
+  void setVel(PVector v) {
+    vel = v;
+  }
+
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
     //friction = 0.06; //ignore friction for mvp
-    
   }
 
   void move() {
-    pos.x += vel.x; //speed
-    pos.y += vel.y;
+    pos.x += vel.x + acc.x; //speed
+    pos.y += vel.y + acc.y;
+    acc.x += 0; //default value
+    acc.y += 0; //default value
     if (pos.x>=width-border-r||pos.x<=border+r) { //bounce
       vel.x *= -1;
-      //acceleration/deceleration here w/ impact of wall on velocity
+      acc.x *= -1;
     }
     if (pos.y>=height-border-r||pos.y<=border+r) {
       vel.y *= -1;
-      //accelerate!
+      acc.y *= -1;
     }
+
     //applyFriction();
   }
+
 
   void applyFriction() {
   }
@@ -61,9 +70,9 @@ public class Ball {
     onBoard = false;
   }
 
-/*  void removeBall() {
-  //use onBoard in getShape, unnecessary?
-  }*/
+  /*  void removeBall() {
+   //use onBoard in getShape, unnecessary?
+   }*/
 
 
   PVector getP() {

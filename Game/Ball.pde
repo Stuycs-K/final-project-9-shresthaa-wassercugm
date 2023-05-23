@@ -2,24 +2,21 @@ public class Ball {
   PVector pos, vel, acc;
   //default acc = (0.1,0.1)
   color col;
-  // int numBall;
+  int numBall;
   // restrict numBall so doesn't overflow for mvp
   //note: cueball has m = 0.17
   // double friction;
   //when moving cueball = up to 0.7!
   boolean onBoard = true;
+  boolean isStriped;
 
 
-  public Ball(int x, int y) { //constructor
+  public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
     vel = new PVector(0.5, 0.5);
     acc = new PVector(0, 0);
-    /*float r = random(255);
-     float g = random(255);
-     float b = random(255);
-     if (g > (r+b)*3/2) {
-     g = g/2;
-     }*/
+    isStriped = stripe;
+    numBall = num;
     col = color(random(255), random(255), random(255));
     if (col == color(41, 163, 33)) {
       col = color(244, 7, 7);
@@ -27,9 +24,6 @@ public class Ball {
     //restrict green color from appearing and camouflage into background
   }
 
-  void setVel(PVector v) {
-    vel = v;
-  }
 
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
     //friction = 0.06; //ignore friction for mvp
@@ -58,23 +52,39 @@ public class Ball {
 
   void getShape() {
     if (onBoard) {
-      fill(col);
       stroke(0);
+      fill(col);
       circle(pos.x, pos.y, (float)r*2);
+      fill(255);
       noStroke();
-      noFill();
+      circle(pos.x, pos.y, (float)r);
+      fill(0);
+      text(numBall, pos.x, pos.y+r/4);
+      if (isStriped){
+        stroke(0);
+        fill(255);
+        arc(pos.x, pos.y, (float)r*2, (float)r*2, PI/4, 3*PI/4, OPEN);
+        arc(pos.x, pos.y, (float)r*2, (float)r*2, 5*PI/4, 7*PI/4, OPEN);
+        
+      }
     }
   }
 
   void goal() {
     onBoard = false;
   }
-
-  /*  void removeBall() {
-   //use onBoard in getShape, unnecessary?
-   }*/
-
-
+  
+  boolean isOverlapping(Ball other){
+    double x = Math.pow(pos.x-other.pos.x, 2);
+    double y = Math.pow(pos.y-other.pos.y, 2);
+    double dist = Math.sqrt(x+y);
+    return dist < 2*r;
+  }
+  
+  void setVel(PVector v) {
+    vel = v;
+  }
+  
   PVector getP() {
     return pos;
   }

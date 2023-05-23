@@ -25,6 +25,12 @@ void setup(){
   
 }
 
+//boolean canPlace(Ball aBall){
+//  for (Ball ball : balls){
+//    if (
+//  }
+//}
+
 void mouseClicked(){
   int x = mouseX;
   int y = mouseY;
@@ -32,7 +38,11 @@ void mouseClicked(){
   if (x > width-border-r){ x = width-border-r; } 
   if (y < border+r){ y = border+r; }
   if (y > height-border-r){ y = height-border-r; }
-  balls.add( new Ball(x, y, true, balls.size()) );
+  
+  boolean stripe = true;
+  if (Math.random() < 0.5){stripe=false;}
+  
+  balls.add( new Ball(x, y, stripe, balls.size()) );
 }
 
 void draw(){

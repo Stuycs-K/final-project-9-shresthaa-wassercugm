@@ -68,16 +68,18 @@ public class Ball {
     onBoard = false;
   }
 
-/*  void removeBall() {
-  //use onBoard in getShape, unnecessary?
-  }*/
-
-
   PVector getP() {
     return pos;
   }
 
   PVector getV() {
     return vel;
+  }
+  
+  boolean isOverlapping(Ball other){
+    double x = Math.pow(pos.x-other.pos.x, 2);
+    double y = Math.pow(pos.y-other.pos.y, 2);
+    double dist = Math.sqrt(x+y);
+    return dist < 2*r;
   }
 }

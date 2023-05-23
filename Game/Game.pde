@@ -35,6 +35,7 @@ void draw(){
   fill(41,163,33);
   rect(50,50,1000,500);
   for (Ball ball : balls){
+    ball.move();
     ball.getShape();
   }
 }

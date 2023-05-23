@@ -4,14 +4,17 @@
 
 ### 5/22/23
 
-Created the files with the outline of methods and all variables in ball.
-Complete accessor methods and revised ball construction to differ in color from background. Finished basic version of move() with velocity and bounce
-(no friction) and using onBoard to remove ball if scored.
+Created the files with the outline of methods and all variables in ball(set final variables by scaling down real life data). Complete accessor methods and revised ball construction to differ in color from background. Finished basic version of move() with velocity and bounce(no friction) and using onBoard to remove ball if scored.
 
 
-### date y
+### 5/23/23
 
-info
+Apply move() in draw and test its functionality. Also revised movement by including acceleration as a factor and fixed issues with bouncing around borders. Tested various speeds and accelerations to find suitable default parameters.
+
+
+### //
+
+--
 
 
 ## Maya
@@ -23,4 +26,4 @@ At home, completed the initial ball class (constructor and getShape()) and added
 
 ### 5/23/23
 
-Changed ball graphics to include stripe/no stripe, and number (modified getShape(), constructor, and Game for random selection). At home, wrote isOverlapping() and canPlace() to solve the issue of overlapping balls. 
+Changed ball graphics to include stripe/no stripe, and number (modified getShape(), constructor, and Game for random selection). At home, wrote isOverlapping() and canPlace() to solve the issue of overlapping balls.

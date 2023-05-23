@@ -13,11 +13,15 @@ void setup(){
   
   balls = new ArrayList<Ball>();
   
+  //other
+  textAlign(CENTER);
+  
   // draw table
+  stroke(0);
   fill(122,72,38);
   rect(0,0, width, height);
   fill(41,163,33);
-  rect(border,border,boardWidth,boardHeight);
+  rect(border, border, boardWidth, boardHeight);
   
 }
 
@@ -28,7 +32,7 @@ void mouseClicked(){
   if (x > width-border-r){ x = width-border-r; } 
   if (y < border+r){ y = border+r; }
   if (y > height-border-r){ y = height-border-r; }
-  balls.add( new Ball(x, y, false, balls.size()) );
+  balls.add( new Ball(x, y, true, balls.size()) );
 }
 
 void draw(){

@@ -46,11 +46,21 @@ public class Ball {
 
   void getShape() {
     if (onBoard) {
-      fill(col);
       stroke(0);
+      fill(col);
       circle(pos.x, pos.y, (float)r*2);
+      fill(255);
       noStroke();
-      noFill();
+      circle(pos.x, pos.y, (float)r);
+      fill(0);
+      text(numBall, pos.x, pos.y+r/4);
+      if (isStriped){
+        stroke(0);
+        fill(255);
+        arc(pos.x, pos.y, (float)r*2, (float)r*2, PI/4, 3*PI/4, OPEN);
+        arc(pos.x, pos.y, (float)r*2, (float)r*2, 5*PI/4, 7*PI/4, OPEN);
+        
+      }
     }
   }
 

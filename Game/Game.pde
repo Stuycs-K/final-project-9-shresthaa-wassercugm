@@ -25,11 +25,14 @@ void setup(){
   
 }
 
-//boolean canPlace(Ball aBall){
-//  for (Ball ball : balls){
-//    if (
-//  }
-//}
+boolean canPlace(Ball aBall){
+  for (Ball ball : balls){
+    if (aBall.isOverlapping(ball)){
+      return false;
+    }
+  }
+  return true;
+}
 
 void mouseClicked(){
   int x = mouseX;
@@ -41,8 +44,12 @@ void mouseClicked(){
   
   boolean stripe = true;
   if (Math.random() < 0.5){stripe=false;}
+  Ball toAdd = new Ball(x, y, stripe, balls.size());
   
-  balls.add( new Ball(x, y, stripe, balls.size()) );
+  if (canPlace(toAdd)){
+    balls.add(toAdd);
+  }
+  
 }
 
 void draw(){

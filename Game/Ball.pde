@@ -47,6 +47,7 @@ public class Ball {
     if (pos.y>=height-border-r||pos.y<=border+r) {
       vel.y *= -1;
     }
+    
     //applyFriction();
   }
 

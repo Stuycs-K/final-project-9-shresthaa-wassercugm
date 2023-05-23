@@ -5,12 +5,12 @@ int boardWidth;
 int boardHeight;
 int border;
 
-void setup(){
+void setup() {
   size(1100, 600);
   boardWidth = 1000;
   boardHeight = 500;
   border = 50;
-  
+
   balls = new ArrayList<Ball>();
   
   //other
@@ -49,13 +49,14 @@ void mouseClicked(){
   if (canPlace(toAdd)){
     balls.add(toAdd);
   }
-  
 }
 
-void draw(){
-  fill(41,163,33);
-  rect(50,50,1000,500);
-  for (Ball ball : balls){
+void draw() {
+  stroke(0);
+  fill(41, 163, 33);
+  rect(50, 50, 1000, 500);
+  for (Ball ball : balls) {
+    ball.move();
     ball.getShape();
   }
 }

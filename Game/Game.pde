@@ -28,7 +28,7 @@ void mouseClicked(){
   if (x > width-border-r){ x = width-border-r; } 
   if (y < border+r){ y = border+r; }
   if (y > height-border-r){ y = height-border-r; }
-  balls.add( new Ball(x, y) );
+  balls.add( new Ball(x, y, false, balls.size()) );
 }
 
 void draw(){

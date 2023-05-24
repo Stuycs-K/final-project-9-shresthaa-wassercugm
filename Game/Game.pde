@@ -1,6 +1,5 @@
 ArrayList<Ball> balls;
 final int r = 16;
-final double m = 0.16; //kilograms
 int boardWidth;
 int boardHeight;
 int border;

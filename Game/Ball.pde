@@ -1,14 +1,12 @@
 public class Ball {
   PVector pos, vel, acc;
-  //default acc = (0.1,0.1)
   color col;
   int numBall;
-  // restrict numBall so doesn't overflow for mvp
-  //note: cueball has m = 0.17
-  // double friction;
-  //when moving cueball = up to 0.7!
   boolean onBoard = true;
   boolean isStriped;
+  final double m = 0.16; //kilograms
+  final double mu = 0.06;
+  final double G = 10.7;
 
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor

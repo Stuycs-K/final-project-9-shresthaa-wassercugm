@@ -6,12 +6,12 @@ public class Ball {
   boolean isStriped;
   final double m = 0.16; //kilograms
   final double mu = 0.06;
-  final double G = 10.7;
+  final double G = 1.07;
 
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(10, 10);
+    vel = new PVector(-6.5, -6.5);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -95,8 +95,8 @@ public class Ball {
     return dist < 2*r;
   }
   
-  void setVel(PVector v) {
-    vel = v;
+  void setVel(float x, float y) {
+    vel.set(x,y);
   }
   
   PVector getP() {

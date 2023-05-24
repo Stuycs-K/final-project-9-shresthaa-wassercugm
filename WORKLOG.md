@@ -27,3 +27,7 @@ At home, completed the initial ball class (constructor and getShape()) and added
 ### 5/23/23
 
 Changed ball graphics to include stripe/no stripe, and number (modified getShape(), constructor, and Game for random selection). At home, wrote isOverlapping() and canPlace() to solve the issue of overlapping balls.
+
+### 5/24/23
+
+fixed balls drawing over the edges issue. Worked on adding friction

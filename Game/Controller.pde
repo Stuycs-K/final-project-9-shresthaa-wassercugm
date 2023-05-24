@@ -23,11 +23,9 @@ class Controller {
   void press(CueBall x) {
     if(code == 0){
       inputs[0] = true;
-    }
-    if(code == 1){
+    }else if(code == 1){
       inputs[1] = true;
-    }
-    if(code == 2){
+    }else if(code == 2){
       if(aimBall){
         x.aim();
         code = 0;

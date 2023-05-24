@@ -1,6 +1,5 @@
 ArrayList<Ball> balls;
 final int r = 16;
-final double m = 0.16; //kilograms
 int boardWidth;
 int boardHeight;
 int border;
@@ -57,8 +56,12 @@ void mouseClicked(){
 
 void draw() {
   drawTable();
-  rect(border, border, boardWidth, boardHeight);
   for (Ball ball : balls) {
+    if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ){
+      ball.setVel(0,0);
+    }else{
+      ball.applyFriction(ball.getForce());
+    }
     ball.move();
     ball.getShape();
   }

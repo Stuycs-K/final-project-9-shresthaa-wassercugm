@@ -5,6 +5,14 @@ int boardWidth;
 int boardHeight;
 int border;
 
+void drawTable(){
+  stroke(0);
+  fill(122,72,38);
+  rect(0,0, width, height);
+  fill(41,163,33);
+  rect(border, border, boardWidth, boardHeight);
+}
+
 void setup() {
   size(1100, 600);
   boardWidth = 1000;
@@ -17,11 +25,7 @@ void setup() {
   textAlign(CENTER);
   
   // draw table
-  stroke(0);
-  fill(122,72,38);
-  rect(0,0, width, height);
-  fill(41,163,33);
-  rect(border, border, boardWidth, boardHeight);
+  drawTable();
   
 }
 
@@ -52,9 +56,8 @@ void mouseClicked(){
 }
 
 void draw() {
-  stroke(0);
-  fill(41, 163, 33);
-  rect(50, 50, 1000, 500);
+  drawTable();
+  rect(border, border, boardWidth, boardHeight);
   for (Ball ball : balls) {
     ball.move();
     ball.getShape();

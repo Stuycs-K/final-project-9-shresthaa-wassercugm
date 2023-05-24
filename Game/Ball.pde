@@ -13,7 +13,7 @@ public class Ball {
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(0.5, 0.5);
+    vel = new PVector(1, 1);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -30,18 +30,22 @@ public class Ball {
   }
 
   void move() {
-    pos.x += vel.x + acc.x; //speed
-    pos.y += vel.y + acc.y;
-    acc.x += 0; //default value
-    acc.y += 0; //default value
-    if (pos.x>=width-border-r||pos.x<=border+r) { //bounce
+    pos.add(vel);
+    
+    // bouncing
+    if (pos.x>=width-border-r||pos.x<=border+r) { 
       vel.x *= -1;
-      acc.x *= -1;
     }
     if (pos.y>=height-border-r||pos.y<=border+r) {
       vel.y *= -1;
-      acc.y *= -1;
     }
+    
+    // preventing high velocity balls from drawing on the border
+    if (pos.x < r+border){ pos.x = r+border; }
+    if (pos.x > width-border-r){ pos.x = width-border-r; }
+    if (pos.y < r+border){ pos.y = r+border; }
+    if (pos.y > height-border-r){ pos.y = height-border-r; } 
+    
 
     //applyFriction();
   }

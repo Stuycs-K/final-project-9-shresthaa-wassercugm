@@ -13,7 +13,7 @@ public class Ball {
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(5, 5);
+    vel = new PVector(1, 1);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;

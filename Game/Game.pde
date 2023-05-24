@@ -1,25 +1,19 @@
-ArrayList<Ball> balls;
+ArrayList<Ball> balls; //first ball is cueball!
 final int r = 16;
 final double m = 0.16; //kilograms
 int boardWidth;
 int boardHeight;
 int border;
 Controller clicks;
-boolean ready = true;
+boolean aimBall = true;
+boolean ready;
+int count;
 
-void mousePressed() {
-  clicks.press();
-}
-
-void mouseReleased() {
-  clicks.release();
-}
-
-void drawTable(){
+void drawTable() {
   stroke(0);
-  fill(122,72,38);
-  rect(0,0, width, height);
-  fill(41,163,33);
+  fill(122, 72, 38);
+  rect(0, 0, width, height);
+  fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
 }
 
@@ -28,40 +22,65 @@ void setup() {
   boardWidth = 1000;
   boardHeight = 500;
   border = 50;
-
-  balls = new ArrayList<Ball>();
   
+  count = 0;
+  balls = new ArrayList<Ball>();
+  balls.add(new CueBall(100, 100, false, 8));
+
   //other
   textAlign(CENTER);
-  
+
   // draw table
   drawTable();
-  
 }
 
-boolean canPlace(Ball aBall){
-  for (Ball ball : balls){
-    if (aBall.isOverlapping(ball)){
+void mousePressed() {
+  ready = false;
+  clicks.press((CueBall)balls.get(0));
+  count += 60;
+}
+
+void mouseReleased() {
+  clicks.release((CueBall)balls.get(0));
+  ready = true;
+  count = 0;
+}
+
+boolean canPlace(Ball aBall) {
+  for (Ball ball : balls) {
+    if (aBall.isOverlapping(ball)) {
       return false;
     }
   }
   return true;
 }
 
-void mouseClicked(){
-  int x = mouseX;
-  int y = mouseY;
-  if (x < border+r){ x = border+r; }
-  if (x > width-border-r){ x = width-border-r; } 
-  if (y < border+r){ y = border+r; }
-  if (y > height-border-r){ y = height-border-r; }
-  
-  boolean stripe = true;
-  if (Math.random() < 0.5){stripe=false;}
-  Ball toAdd = new Ball(x, y, stripe, balls.size());
-  
-  if (canPlace(toAdd)){
-    balls.add(toAdd);
+void mouseClicked() {
+  if (ready) {
+    int x = mouseX;
+    int y = mouseY;
+    if (x < border+r) {
+      x = border+r;
+    }
+    if (x > width-border-r) {
+      x = width-border-r;
+    }
+    if (y < border+r) {
+      y = border+r;
+    }
+    if (y > height-border-r) {
+      y = height-border-r;
+    }
+
+    boolean stripe = true;
+    if (Math.random() < 0.5) {
+      stripe=false;
+    }
+    Ball toAdd = new Ball(x, y, stripe, balls.size());
+
+    if (canPlace(toAdd)) {
+      balls.add(toAdd);
+    }
   }
 }
 

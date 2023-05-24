@@ -6,6 +6,12 @@ public class CueBall extends Ball{
     super(x,y,stripe,num);
   }
   
+  void aim(){
+    vel = direction;
+    //force = strength;
+    move();
+  }
+  
   void setP(PVector p){
     pos = p;
   }

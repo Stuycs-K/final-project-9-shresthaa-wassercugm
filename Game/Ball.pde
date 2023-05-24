@@ -26,7 +26,7 @@ public class Ball {
 
 
   void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
-    //friction = 0.06; //ignore friction for mvp
+    //friction = 0.06;
   }
 
   void move() {

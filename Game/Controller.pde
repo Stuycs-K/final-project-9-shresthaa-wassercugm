@@ -5,22 +5,22 @@ class Controller {
   int code = 0;
 
   public Controller() {
-    inputs = new boolean[2];//2 valid buttons
+    inputs = new boolean[2];//2 valid buttons: direction, strength of hit
   }
   
-  void initialD(PVector mouse, CueBall x){
-    x.setD(x.getP().sub(mouse).normalize());
+  void initialD(CueBall x){
+    x.setD(x.getP().sub(new PVector(mouseX,mouseY)).normalize());
   }
   
-  void initialS(){
-    
+  void initialS(CueBall x){
+    x.setS(count);
   }
   
   boolean isPressed(int command) {
     return inputs[command];
   }
 
-  void press() {
+  void press(CueBall x) {
     if(code == 0){
       inputs[0] = true;
     }
@@ -28,21 +28,23 @@ class Controller {
       inputs[1] = true;
     }
     if(code == 2){
-      if(ready){
+      if(aimBall){
+        x.aim();
         code = 0;
       }else{
-        System.out.print("wait until simulation ends");
+        System.out.print("wait until simulation movement ends");
       }
     }
   }
   
-  void release(int code) {
+  void release(CueBall x) {
     if(code == 0){
       inputs[0] = false;
+      initialD(x);
       code++;
-    }
-    if(code == 1){
+    }else if(code == 1){
       inputs[1] = false;
+      initialS(x);
       code = 2;
     }
   }

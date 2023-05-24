@@ -47,6 +47,14 @@ public class Ball {
 
     //applyFriction();
   }
+  
+  PVector getForce(){
+    double mag = mu * m * G;
+    PVector force = PVector.mult(vel, -1);
+    force.normalize();
+    force.mult( (float) mag );
+    return force;
+  }
 
 
   void applyFriction() {

@@ -11,7 +11,7 @@ public class Ball {
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(1, 1);
+    vel = new PVector(10, 10);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -28,7 +28,9 @@ public class Ball {
   }
 
   void move() {
+    vel.add(acc);
     pos.add(vel);
+    acc.set(0, 0);
     
     // bouncing
     if (pos.x>=width-border-r||pos.x<=border+r) { 
@@ -57,7 +59,9 @@ public class Ball {
   }
 
 
-  void applyFriction() {
+  void applyFriction(PVector f) {
+    f.div((float)m);
+    acc.add(f);
   }
 
   void getShape() {

@@ -58,6 +58,7 @@ void draw() {
   drawTable();
   rect(border, border, boardWidth, boardHeight);
   for (Ball ball : balls) {
+    ball.applyFriction(ball.getForce());
     ball.move();
     ball.getShape();
   }

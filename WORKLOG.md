@@ -9,20 +9,19 @@ Created the files with the outline of methods and all variables in ball(set fina
 
 ### 5/23/23
 
-Apply move() in draw and test its functionality. Also revised movement by including acceleration as a factor and fixed issues with bouncing around borders. Tested various speeds and accelerations to find suitable default parameters.
+Apply move() in draw and test its functionality. Also revised movement by including acceleration as a factor and fixed issues with bouncing around borders. Used physics formulas to calculate force, acceleration, and velocity as well as friction force based on the friction coefficient of 0.06 although more testing is needed.
 
 
-### //
+### 5/24/23
 
---
+Fixed friction with Maya. Also began working on the CueBall class, using mousePressed() and mouseReleased() to control the strength and direction it is hit. Actual implementation still needs to be done but the overall outline and plan has been completed.
 
 
 ## Maya
 
 ### 5/22/23
 
-Started working on the setup() in Game for pool table graphics in class.
-At home, completed the initial ball class (constructor and getShape()) and added the ability to add balls.
+Started working on the setup() in Game for pool table graphics in class.At home, completed the initial ball class (constructor and getShape()) and added the ability to add balls.
 
 ### 5/23/23
 
@@ -30,4 +29,4 @@ Changed ball graphics to include stripe/no stripe, and number (modified getShape
 
 ### 5/24/23
 
-fixed balls drawing over the edges issue. Worked on adding friction
+fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation.

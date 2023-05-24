@@ -1,19 +1,17 @@
 public class Ball {
   PVector pos, vel, acc;
-  //default acc = (0.1,0.1)
   color col;
   int numBall;
-  // restrict numBall so doesn't overflow for mvp
-  //note: cueball has m = 0.17
-  // double friction;
-  //when moving cueball = up to 0.7!
   boolean onBoard = true;
   boolean isStriped;
+  final double m = 0.16; //kilograms
+  final double mu = 0.06;
+  final double G = 1.07;
 
 
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(1, 1);
+    vel = new PVector(-6.5, -6.5);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -30,7 +28,9 @@ public class Ball {
   }
 
   void move() {
+    vel.add(acc);
     pos.add(vel);
+    acc.set(0, 0);
     
     // bouncing
     if (pos.x>=width-border-r||pos.x<=border+r) { 
@@ -49,9 +49,19 @@ public class Ball {
 
     //applyFriction();
   }
+  
+  PVector getForce(){
+    double mag = mu * m * G;
+    PVector force = PVector.mult(vel, -1);
+    force.normalize();
+    force.mult( (float) mag );
+    return force;
+  }
 
 
-  void applyFriction() {
+  void applyFriction(PVector f) {
+    f.div((float)m);
+    acc.add(f);
   }
 
   void getShape() {
@@ -85,8 +95,8 @@ public class Ball {
     return dist < 2*r;
   }
   
-  void setVel(PVector v) {
-    vel = v;
+  void setVel(float x, float y) {
+    vel.set(x,y);
   }
   
   PVector getP() {

@@ -8,8 +8,8 @@ class Controller {
     inputs = new boolean[2];//2 valid buttons
   }
   
-  PVector initialD(PVector mouse, CueBall x){
-    return mouse;
+  void initialD(PVector mouse, CueBall x){
+    x.setD(x.getP().sub(mouse).normalize());
   }
   
   void initialS(){

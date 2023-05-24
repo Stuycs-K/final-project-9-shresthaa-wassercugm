@@ -4,6 +4,15 @@ final double m = 0.16; //kilograms
 int boardWidth;
 int boardHeight;
 int border;
+Controller keyboardInput;
+
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
+}
 
 void drawTable(){
   stroke(0);

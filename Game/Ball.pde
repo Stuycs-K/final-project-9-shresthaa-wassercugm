@@ -11,7 +11,7 @@ public class Ball {
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(-5, 5);
+    vel = new PVector(4, -4);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -36,36 +36,27 @@ public class Ball {
   }
 
   void collide(Ball other){
-    //float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
-    //PVector newVA = vel.rotate(angle);
-    //PVector newVB = other.vel.rotate(angle);
-    //float temp = newVA.x;
-    //newVA.x = newVB.x;
-    //newVB.x = temp;
-    //vel = newVA.rotate(-angle);
-    //other.vel = newVB.rotate(-angle);
+    // this: A
+    // other: B
+    float overlap = 2*r - dist(pos.x, pos.y, other.pos.x, other.pos.y);
+    PVector copyA = this.vel.copy().normalize().mult(overlap/2);
+    PVector copyB = other.vel.copy().normalize().mult(overlap/2);
+    this.pos.add(copyA);
+    other.pos.add(copyB);
     
-    //// A : this
-    //// B : other
-    //PVector V0 = PVector.sub(vel, other.vel);
-
-    //PVector newVB = new PVector(other.pos.x-pos.x, other.pos.y-pos.y);
-    //newVB.normalize();
-    
-    //float angle = PVector.angleBetween(V0, newVB);
-    //PVector newVA = V0.rotate(PI/2-angle);
-    //newVA.normalize();
-    
-    //double magA = V0.mag() * Math.sin(angle);
-    //double magB = V0.mag() * Math.cos(angle);
-    
-    //newVA.mult((float)magA);
-    //newVB.mult((float)magB);
-    //newVA.add(other.vel);
-    //newVB.add(other.vel);
-    
-    //vel = newVA;
-    //other.vel = newVB;
+    float dx = other.pos.x - this.pos.x;
+    float dy = other.pos.y - this.pos.y;
+    float angle = atan2(dy,dx);
+    PVector newVA = this.vel.copy();
+    PVector newVB = other.vel.copy();
+    newVA.rotate(angle);
+    newVB.rotate(angle);
+    newVA.x = other.vel.x;
+    newVB.x = this.vel.x;
+    newVA.rotate(-angle);
+    newVB.rotate(-angle);
+    vel = newVA;
+    other.vel = newVB;
         
   }
 
@@ -131,10 +122,8 @@ public class Ball {
   }
   
   boolean isOverlapping(Ball other){
-    double x = Math.pow(pos.x-other.pos.x, 2);
-    double y = Math.pow(pos.y-other.pos.y, 2);
-    double dist = Math.sqrt(x+y);
-    return dist <= 2*r;
+    double dist = dist(pos.x, pos.y, other.pos.x, other.pos.y);
+    return dist < 2*r;
   }
   
   void setVel(float x, float y) {

@@ -29,4 +29,4 @@ Changed ball graphics to include stripe/no stripe, and number (modified getShape
 
 ### 5/24/23
 
-fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation.
+fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation. Added collision, which works, but still has some major bugs. 

@@ -23,8 +23,22 @@ public class Ball {
   }
 
 
-  void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
-    //friction = 0.06; //ignore friction for mvp
+  //void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
+  //  //friction = 0.06; //ignore friction for mvp
+  //}
+  
+  
+  // A (this) is moving, B (other) is stationary
+  void collide(Ball other){
+    float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
+    vel.rotate(angle);
+    other.vel.rotate(angle);
+    float temp = vel.x;
+    vel.x = other.vel.x;
+    other.vel.x = temp;
+    vel.rotate(-angle);
+    other.vel.rotate(-angle);
+    
   }
 
   void move() {

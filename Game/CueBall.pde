@@ -1,34 +1,25 @@
-public class CueBall extends Ball{
-  PVector direction, f; //start direction, will be implemented with spin
-  double strength;
-  
+public class CueBall extends Ball {
+  PVector direction, force; //start direction, will be implemented with spin
+
   public CueBall(int x, int y, boolean stripe, int num) { //constructor
-    super(x,y,stripe,num);
+    super(x, y, stripe, num);
+    force = new PVector(0,0);
   }
-  
-  void aim(){
+
+  void aim() {
     vel = direction;
-    f = strength;
     move();
   }
-  
-  PVector getForce(){
-    double mag = mu * m * G;
-    PVector force = PVector.mult(vel, -1);
-    force.normalize();
-    force.mult( (float) mag );
-    return force;
-  }
-  
-  void setP(PVector p){
+
+  void setP(PVector p) {
     pos = p;
   }
-  
-  void setD(PVector d){
+
+  void setD(PVector d) {
     direction = d;
   }
-  
-  void setS(double s){
-    strength = s;
+
+  void setF(PVector f) {
+    force = PVector.add(force,f);
   }
 }

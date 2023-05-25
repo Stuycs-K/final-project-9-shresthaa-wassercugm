@@ -9,7 +9,7 @@ public class Ball {
   final double G = 1.07;
 
 
-  public Ball(int x, int y, boolean stripe, int num) { //constructor
+  public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
     vel = new PVector(-6.5, -6.5);
     acc = new PVector(0, 0);
@@ -21,7 +21,19 @@ public class Ball {
     }
     //restrict green color from appearing and camouflage into background
   }
-
+  
+  public Ball(float x, float y, float xv, float yv, boolean stripe, int num) { //constructor
+    pos = new PVector(x, y);
+    vel = new PVector(xv, -yv);
+    acc = new PVector(0, 0);
+    isStriped = stripe;
+    numBall = num;
+    col = color(random(255), random(255), random(255));
+    if (col == color(41, 163, 33)) {
+      col = color(244, 7, 7);
+    }
+    //restrict green color from appearing and camouflage into background
+  }
 
   //void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
   //  //friction = 0.06; //ignore friction for mvp

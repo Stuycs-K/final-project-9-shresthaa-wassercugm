@@ -66,7 +66,7 @@ void draw() {
       }
     }
     
-    if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ){
+    if ( abs( ball.getV().x ) < 0.01 && abs( ball.getV().y ) < 0.01 ){
       ball.setVel(0,0);
     }else{
       ball.applyFriction(ball.getForce());

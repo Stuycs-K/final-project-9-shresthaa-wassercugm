@@ -1,11 +1,11 @@
-ArrayList<Ball> balls; //first ball is cueball!
+ArrayList<Ball> balls;
 CueBall cue;
 final int r = 16;
 int boardWidth;
 int boardHeight;
 int border;
 int aimBall = 0;
-int count;
+float count;
 boolean ready = true;
 
 void drawTable() {
@@ -25,7 +25,6 @@ void setup() {
   count = 0;
   cue = new CueBall(100, 100, false, 8);
   balls = new ArrayList<Ball>();
-  balls.add(cue);
 
   //other
   textAlign(CENTER);
@@ -84,6 +83,14 @@ void mouseClicked() {
 
 void draw() {
   drawTable();
+  if ( abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 ) {
+    cue.setVel(0, 0);
+    aimBall = 0;
+  } else {
+    cue.applyFriction();
+  }
+  cue.move();
+  cue.getShape();
   for (Ball ball : balls) {
     if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
       ball.setVel(0, 0);

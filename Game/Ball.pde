@@ -35,21 +35,22 @@ public class Ball {
     //restrict green color from appearing and camouflage into background
   }
 
-  //void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
-  //  //friction = 0.06; //ignore friction for mvp
-  //}
-  
-  
-  // A (this) is moving, B (other) is stationary
   void collide(Ball other){
-    float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
-    vel.rotate(angle);
-    other.vel.rotate(angle);
-    float temp = vel.x;
-    vel.x = other.vel.x;
-    other.vel.x = temp;
-    vel.rotate(-angle);
-    other.vel.rotate(-angle);
+    if ( other.pos.y-pos.y < 0.1 ){
+      float temp = vel.x;
+      vel.x = other.vel.x;
+      other.vel.x = temp;
+    }else{
+      float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
+      vel.rotate(angle);
+      other.vel.rotate(angle);
+      float temp = vel.x;
+      vel.x = other.vel.x;
+      other.vel.x = temp;
+      vel.rotate(-angle);
+      other.vel.rotate(-angle);
+    }
+    
     
   }
 
@@ -118,7 +119,7 @@ public class Ball {
     double x = Math.pow(pos.x-other.pos.x, 2);
     double y = Math.pow(pos.y-other.pos.y, 2);
     double dist = Math.sqrt(x+y);
-    return dist < 2*r;
+    return dist <= 2*r;
   }
   
   void setVel(float x, float y) {

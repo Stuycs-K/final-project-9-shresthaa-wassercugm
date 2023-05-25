@@ -4,8 +4,7 @@ final int r = 16;
 int boardWidth;
 int boardHeight;
 int border;
-Controller clicks;
-int aimBall = 1;
+int aimBall = 0;
 int count;
 boolean ready = true;
 
@@ -46,17 +45,18 @@ boolean canPlace(Ball aBall) {
 }
 
 void mouseClicked() {
-  if (aimBall == 1) {
+
+  int x = mouseX;
+  int y = mouseY;
+  if (aimBall == 0) {
     while (mousePressed) {
-      clicks.press();
+      cue.press(x, y);
       count += 60;
     }
-  } else if (aimBall == 2) {
-    clicks.press();
+  } else if (aimBall == 1) {
+    cue.press(x, y);
     count = 0;
   } else {
-    int x = mouseX;
-    int y = mouseY;
     if (x < border+r) {
       x = border+r;
     }

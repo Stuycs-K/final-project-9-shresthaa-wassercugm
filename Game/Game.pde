@@ -19,8 +19,6 @@ void setup() {
   border = 50;
 
   balls = new ArrayList<Ball>();
-  balls.add( new Ball(400,400,5,5,false,1) );
-  balls.add( new Ball(600,200,0,0,false,2) );
   
   //other
   textAlign(CENTER);

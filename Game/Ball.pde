@@ -11,7 +11,7 @@ public class Ball {
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(4, -4);
+    vel = new PVector(6.5, 6.5);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -36,27 +36,22 @@ public class Ball {
   }
 
   void collide(Ball other){
-    // this: A
-    // other: B
-    float overlap = 2*r - dist(pos.x, pos.y, other.pos.x, other.pos.y);
-    PVector copyA = this.vel.copy().normalize().mult(overlap/2);
-    PVector copyB = other.vel.copy().normalize().mult(overlap/2);
-    this.pos.add(copyA);
-    other.pos.add(copyB);
+     //this: A
+     //other: B
+    // float overlap = 2*r - this.pos.dist(other.pos);
     
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;
     float angle = atan2(dy,dx);
-    PVector newVA = this.vel.copy();
-    PVector newVB = other.vel.copy();
-    newVA.rotate(angle);
-    newVB.rotate(angle);
-    newVA.x = other.vel.x;
-    newVB.x = this.vel.x;
-    newVA.rotate(-angle);
-    newVB.rotate(-angle);
-    vel = newVA;
-    other.vel = newVB;
+    //PVector newVA = this.vel.copy();
+    //PVector newVB = other.vel.copy();
+    this.vel.rotate(angle);
+    other.vel.rotate(angle);
+    float temp = this.vel.x;
+    this.vel.x = other.vel.x;
+    other.vel.x = temp;
+    this.vel.rotate(-angle);
+    other.vel.rotate(-angle);
         
   }
 

@@ -11,7 +11,7 @@ public class Ball {
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(0, 5);
+    vel = new PVector(-5, 5);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -36,32 +36,37 @@ public class Ball {
   }
 
   void collide(Ball other){
-    //if ( abs(other.pos.y-pos.y) < 0.1 ){
-    //  float temp = vel.x;
-    //  vel.x = other.vel.x;
-    //  other.vel.x = temp;
-    //}else{
-    //  float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
-    //  vel.rotate(angle);
-    //  other.vel.rotate(angle);
-    //  float temp = vel.x;
-    //  vel.x = other.vel.x;
-    //  other.vel.x = temp;
-    //  vel.rotate(-angle);
-    //  other.vel.rotate(-angle);
-    //}
+    //float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
+    //PVector newVA = vel.rotate(angle);
+    //PVector newVB = other.vel.rotate(angle);
+    //float temp = newVA.x;
+    //newVA.x = newVB.x;
+    //newVB.x = temp;
+    //vel = newVA.rotate(-angle);
+    //other.vel = newVB.rotate(-angle);
     
-    // A : this
-    // B : other
-    double angle = Math.atan( (other.pos.y-pos.y) / (other.pos.x-pos.x) );
-    PVector V0 = PVector.sub(vel, other.vel);
-    PVector newVB = new PVector(-pos.x,-pos.y);
-    newVB.normalize();
-    PVector newVA = V0.rotate((float)angle);
-    newVA.normalize();
-    double magA = V0.mag() * Math.sin(angle);
+    //// A : this
+    //// B : other
+    //PVector V0 = PVector.sub(vel, other.vel);
+
+    //PVector newVB = new PVector(other.pos.x-pos.x, other.pos.y-pos.y);
+    //newVB.normalize();
     
+    //float angle = PVector.angleBetween(V0, newVB);
+    //PVector newVA = V0.rotate(PI/2-angle);
+    //newVA.normalize();
     
+    //double magA = V0.mag() * Math.sin(angle);
+    //double magB = V0.mag() * Math.cos(angle);
+    
+    //newVA.mult((float)magA);
+    //newVB.mult((float)magB);
+    //newVA.add(other.vel);
+    //newVB.add(other.vel);
+    
+    //vel = newVA;
+    //other.vel = newVB;
+        
   }
 
   void move() {

@@ -11,7 +11,7 @@ public class Ball {
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(-6.5, -6.5);
+    vel = new PVector(0, 5);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -24,7 +24,7 @@ public class Ball {
   
   public Ball(float x, float y, float xv, float yv, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(xv, -yv);
+    vel = new PVector(xv, yv);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -36,20 +36,30 @@ public class Ball {
   }
 
   void collide(Ball other){
-    if ( other.pos.y-pos.y < 0.1 ){
-      float temp = vel.x;
-      vel.x = other.vel.x;
-      other.vel.x = temp;
-    }else{
-      float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
-      vel.rotate(angle);
-      other.vel.rotate(angle);
-      float temp = vel.x;
-      vel.x = other.vel.x;
-      other.vel.x = temp;
-      vel.rotate(-angle);
-      other.vel.rotate(-angle);
-    }
+    //if ( abs(other.pos.y-pos.y) < 0.1 ){
+    //  float temp = vel.x;
+    //  vel.x = other.vel.x;
+    //  other.vel.x = temp;
+    //}else{
+    //  float angle = (float) Math.atan( (other.pos.y - pos.y) - (other.pos.x - pos.x) );
+    //  vel.rotate(angle);
+    //  other.vel.rotate(angle);
+    //  float temp = vel.x;
+    //  vel.x = other.vel.x;
+    //  other.vel.x = temp;
+    //  vel.rotate(-angle);
+    //  other.vel.rotate(-angle);
+    //}
+    
+    // A : this
+    // B : other
+    double angle = Math.atan( (other.pos.y-pos.y) / (other.pos.x-pos.x) );
+    PVector V0 = PVector.sub(vel, other.vel);
+    PVector newVB = new PVector(-pos.x,-pos.y);
+    newVB.normalize();
+    PVector newVA = V0.rotate((float)angle);
+    newVA.normalize();
+    double magA = V0.mag() * Math.sin(angle);
     
     
   }

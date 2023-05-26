@@ -47,7 +47,7 @@ void mouseClicked(){
   
   boolean stripe = true;
   if (Math.random() < 0.5){stripe=false;}
-  Ball toAdd = new Ball(x, y, stripe, balls.size());
+  Ball toAdd = new Ball(x, y, stripe, balls.size()+1);
   
   if (canPlace(toAdd)){
     balls.add(toAdd);
@@ -56,12 +56,22 @@ void mouseClicked(){
 
 void draw() {
   drawTable();
-  for (Ball ball : balls) {
-    if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ){
+  for (int i = 0; i < balls.size(); i++) {
+    Ball ball = balls.get(i);
+    
+    for (int j = i+1; j < balls.size(); j++){
+      Ball other = balls.get(j);
+      if (ball.isOverlapping(other)){
+        ball.collide(other);
+      }
+    }
+    
+    if ( abs( ball.getV().x ) < 0.05 && abs( ball.getV().y ) < 0.05 ){
       ball.setVel(0,0);
     }else{
       ball.applyFriction(ball.getForce());
     }
+    
     ball.move();
     ball.getShape();
   }

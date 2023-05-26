@@ -6,12 +6,20 @@ public class Ball {
   boolean isStriped;
   final double m = 0.16; //kilograms
   final double mu = 0.06;
-  final double G = 1.07;
-
+  final double G = 1.07; 
+  
+  public Ball(float x, float y, boolean stripe, color c, int num){
+    pos = new PVector(x,y);
+    vel = new PVector(0,0);
+    acc = new PVector(0,0);
+    isStriped = stripe;
+    col = c;
+    numBall = num;
+  }
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(6.5, 6.5);
+    vel = new PVector(0, -0);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -22,9 +30,10 @@ public class Ball {
     //restrict green color from appearing and camouflage into background
   }
   
-  public Ball(float x, float y, float xv, float yv, boolean stripe, int num) { //constructor
+  // for testing purposes
+  public Ball(float x, float y, float vx, float vy, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(xv, yv);
+    vel = new PVector(vx, vy);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -48,9 +57,7 @@ public class Ball {
   
 
   void collide(Ball other){
-     //this: A
-     //other: B
-     fixOverlap(other);
+    fixOverlap(other);
      
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;

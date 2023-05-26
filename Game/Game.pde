@@ -5,7 +5,8 @@ int boardWidth;
 int boardHeight;
 int border;
 boolean canShoot;
-PVector aimDirection;
+PVector aimDirection; // should be kept normalized
+Controller keyboardInput;
 
 void drawTable(){
   stroke(0);
@@ -85,6 +86,14 @@ void drawArrow(){
           );
   strokeWeight(1);
   
+}
+
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
+
+void keyReleased() {
+  keyboardInput.release(keyCode);
 }
 
 void draw() {

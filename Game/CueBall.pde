@@ -13,21 +13,21 @@ public class CueBall extends Ball {
     move();
   }
 
-  int press(int x, int y) {
-    if (aimBall == 0) {
-      setD(getP().sub(new PVector(x, y)).normalize());
-    } else if (aimBall == 1) {
-      setS(count);
-    } else if (aimBall == 2) {
-      if (ready) {
-        cue.aim();
-        ready = true;
-      } else {
-        System.out.print("wait until simulation movement ends");
-      }
-    }
-    return aimBall;
-  }
+  //int press(int x, int y) {
+  //  if (aimBall == 0) {
+  //    setD(getP().sub(new PVector(x, y)).normalize());
+  //  } else if (aimBall == 1) {
+  //    setS(count);
+  //  } else if (aimBall == 2) {
+  //    if (ready) {
+  //      cue.aim();
+  //      ready = true;
+  //    } else {
+  //      System.out.print("wait until simulation movement ends");
+  //    }
+  //  }
+  //  return aimBall;
+  //}
 
   void aim() {
     vel = direction;

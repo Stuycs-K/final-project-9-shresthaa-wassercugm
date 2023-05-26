@@ -50,6 +50,8 @@ public class Ball {
   void collide(Ball other){
      //this: A
      //other: B
+     fixOverlap(other);
+     
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;
     float angle = atan2(dy,dx);
@@ -60,8 +62,6 @@ public class Ball {
     other.vel.x = temp;
     this.vel.rotate(-angle);
     other.vel.rotate(-angle);
-    
-    fixOverlap(other);
         
   }
 

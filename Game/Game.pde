@@ -98,6 +98,23 @@ void mouseClicked() {
   }
 }
 
+//void mouseClicked(){
+//  int x = mouseX;
+//  int y = mouseY;
+//  if (x < border+r){ x = border+r; }
+//  if (x > width-border-r){ x = width-border-r; } 
+//  if (y < border+r){ y = border+r; }
+//  if (y > height-border-r){ y = height-border-r; }
+  
+//  boolean stripe = true;
+//  if (Math.random() < 0.5){stripe=false;}
+//  Ball toAdd = new Ball(x, y, stripe, balls.size()+1);
+  
+//  if (canPlace(toAdd)){
+//    balls.add(toAdd);
+//  }
+//}
+
 void draw() {
   drawTable();
   /*if(!ready && ballStop == balls.size()){
@@ -111,14 +128,23 @@ void draw() {
   }
   cue.move();
   cue.getShape();
-  for (Ball ball : balls) {
+  for (int i=0; i < balls.size(); i++) {
+    Ball ball = balls.get(i);
+    
     if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
       ball.setVel(0, 0);
       ballStop++;
     } else {
-      ball.applyFriction(ball.getForce());
-      ballStop--;
+       ballStop--;
     }
+    
+    for (int j = i+1; j < balls.size(); j++){
+      Ball other = balls.get(j);
+      if (ball.isOverlapping(other)){
+        ball.collide(other);
+      }
+    }
+    
     ball.move();
     ball.getShape();
   }

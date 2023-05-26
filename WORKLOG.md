@@ -41,3 +41,7 @@ fixed balls drawing over the edges issue. Modified Ball and Game to add friction
 ### 5/25/23
 
 Tried a different model for handling collisions, but didn't work. Made progress towards fixing the old collision simulator.
+
+### 5/26/23
+
+Finished working on collisions. Added new constructor to Ball to include color.

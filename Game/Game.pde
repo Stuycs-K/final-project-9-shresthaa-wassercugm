@@ -28,8 +28,12 @@ void setup() {
   
   //other
   textAlign(CENTER);
+  
   canShoot = false;
+  
   aimDirection = new PVector(0,1).normalize();
+  
+  keyboardInput = new Controller();
   
   // draw table
   drawTable();
@@ -102,6 +106,10 @@ void draw() {
   
   if (canShoot){
     drawArrow();
+    if (keyboardInput.isPressed(Controller.enter)){
+      cue.setV( aimDirection.mult(10) );
+      canShoot = false;
+    }
   }
   
   

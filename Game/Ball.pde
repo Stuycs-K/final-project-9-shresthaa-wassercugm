@@ -142,6 +142,10 @@ public class Ball {
     vel.set(x,y);
   }
   
+  void setV(PVector v) {
+    vel = v;
+  }
+  
   PVector getP() {
     return pos;
   }

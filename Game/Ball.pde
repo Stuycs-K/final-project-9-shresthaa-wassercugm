@@ -8,7 +8,6 @@ public class Ball {
   final double mu = 0.06;
   final double G = 1.07;
 
-
   public Ball(int x, int y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
     vel = new PVector(-6.5, -6.5);

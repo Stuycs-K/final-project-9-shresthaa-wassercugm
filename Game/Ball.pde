@@ -34,17 +34,25 @@ public class Ball {
     }
     //restrict green color from appearing and camouflage into background
   }
+  
+  void fixOverlap(Ball other){
+    float overlap = 2*r - this.pos.dist(other.pos);
+    float dx = other.pos.x - this.pos.x;
+    float dy = other.pos.y - this.pos.y;
+    PVector fixOther = new PVector(dx, dy).normalize().mult(overlap/2);
+    PVector fixThis = new PVector(-dx, -dy).normalize().mult(overlap/2);
+    other.pos.add(fixOther);
+    pos.add(fixThis);
+  }
+  
+  
 
   void collide(Ball other){
      //this: A
      //other: B
-    // float overlap = 2*r - this.pos.dist(other.pos);
-    
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;
     float angle = atan2(dy,dx);
-    //PVector newVA = this.vel.copy();
-    //PVector newVB = other.vel.copy();
     this.vel.rotate(angle);
     other.vel.rotate(angle);
     float temp = this.vel.x;
@@ -52,6 +60,8 @@ public class Ball {
     other.vel.x = temp;
     this.vel.rotate(-angle);
     other.vel.rotate(-angle);
+    
+    fixOverlap(other);
         
   }
 

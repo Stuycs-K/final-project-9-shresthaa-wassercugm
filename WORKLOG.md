@@ -28,7 +28,7 @@ Continued working on cueBall aiming and completed initial mouse controls and boo
 
 ### 5/22/23
 
-Started working on the setup() in Game for pool table graphics in class.At home, completed the initial ball class (constructor and getShape()) and added the ability to add balls.
+Started working on the setup() in Game for pool table graphics in class. At home, completed the initial ball class (constructor and getShape()) and added the ability to add balls.
 
 ### 5/23/23
 
@@ -37,3 +37,7 @@ Changed ball graphics to include stripe/no stripe, and number (modified getShape
 ### 5/24/23
 
 fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation. Added collision, which works, but still has some major bugs.
+
+### 5/25/23
+
+Tried a different model for handling collisions, but didn't work. Made progress towards fixing the old collision simulator.

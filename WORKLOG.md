@@ -16,6 +16,13 @@ Apply move() in draw and test its functionality. Also revised movement by includ
 
 Fixed friction with Maya. Also began working on the CueBall class, using mousePressed() and mouseReleased() to control the strength and direction it is hit. Actual implementation still needs to be done but the overall outline and plan has been completed.
 
+### 5/25/23
+
+Continued working on cueBall aiming and completed initial mouse controls and booleans/restrictions on aiming or creating new balls. Also began fixing move() and applyFriction() in order to use player controlled direction and strength(of aiming) variables rather than just gravitational force.
+
+### //
+
+--
 
 ## Maya
 
@@ -29,4 +36,4 @@ Changed ball graphics to include stripe/no stripe, and number (modified getShape
 
 ### 5/24/23
 
-fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation. Added collision, which works, but still has some major bugs. 
+fixed balls drawing over the edges issue. Modified Ball and Game to add friction to the simulation. Added collision, which works, but still has some major bugs.

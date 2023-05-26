@@ -68,17 +68,31 @@ void mouseDragged(){
   }
 }
 
+void drawArrow(){
+  strokeWeight(4);
+  stroke(0);
+  float x1 = cue.getP().x;
+  float y1 = cue.getP().y;
+  float x2 = x1 + aimDirection.x*100;
+  float y2 = y1 + aimDirection.y*100;
+  line(x1, y1, x2, y2);
+  PVector normal = aimDirection.copy();
+  normal.rotate(PI/2);
+  fill(0);
+  triangle( x1 + aimDirection.x*110, y1 + aimDirection.y*110,
+            x2 + normal.x*5, y2 + normal.y * 5,
+            x2 - normal.x*5, y2 - normal.y * 5
+          );
+  strokeWeight(1);
+  
+}
+
 void draw() {
   drawTable();
   int stopped = 0;
   
   if (canShoot){
-   strokeWeight(4);
-   stroke(112,38,209);
-   float x = cue.getP().x;
-   float y = cue.getP().y;
-   line(x, y, x + aimDirection.x*100, y + aimDirection.y*100);
-   strokeWeight(1);
+    drawArrow();
   }
   
   

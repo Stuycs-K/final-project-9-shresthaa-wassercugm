@@ -1,12 +1,13 @@
 ArrayList<Ball> balls;
-CueBall cue;
+CueBall cue = new CueBall(500, 500);
 final int r = 16;
 int boardWidth;
 int boardHeight;
 int border;
 int aimBall = 0;
 float count;
-boolean ready = true;
+boolean ready = true; //indicates player can start aiming
+int ballStop;
 
 void drawTable() {
   stroke(0);
@@ -23,8 +24,8 @@ void setup() {
   border = 50;
 
   count = 0;
-  cue = new CueBall(100, 100, false, 8);
   balls = new ArrayList<Ball>();
+  ballStop = 0;
 
   //other
   textAlign(CENTER);
@@ -43,19 +44,35 @@ boolean canPlace(Ball aBall) {
   return true;
 }
 
-void mouseClicked() {
-
-  int x = mouseX;
-  int y = mouseY;
+void mouseReleased() {
   if (aimBall == 0) {
-    while (mousePressed) {
-      cue.press(x, y);
-      count += 60;
+    aimBall++;
+  } else if (ready&&aimBall==2) {
+    aimBall = 0;
+  }
+}
+
+void mousePressed() {
+  System.out.println(aimBall);
+  if (aimBall == 0) {
+    aimBall = cue.press(mouseX, mouseY);
+    count += 10;
+    if(count > 100){
+      count = 1;
     }
-  } else if (aimBall == 1) {
-    cue.press(x, y);
+    System.out.println(count);
+  }
+}
+
+void mouseClicked() {
+  if (aimBall == 1) {
+    aimBall = cue.press(mouseX, mouseY);
     count = 0;
-  } else {
+    aimBall++;
+    ready = false;
+  } else if (aimBall == 2) {
+    int x = mouseX;
+    int y = mouseY;
     if (x < border+r) {
       x = border+r;
     }
@@ -83,7 +100,10 @@ void mouseClicked() {
 
 void draw() {
   drawTable();
-  if ( abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 ) {
+  /*if(!ready && ballStop == balls.size()){
+    ready = true;
+  }*/
+  if ((ready&&aimBall!=1) || (abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 )) {
     cue.setVel(0, 0);
     aimBall = 0;
   } else {
@@ -94,8 +114,10 @@ void draw() {
   for (Ball ball : balls) {
     if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
       ball.setVel(0, 0);
+      ballStop++;
     } else {
       ball.applyFriction(ball.getForce());
+      ballStop--;
     }
     ball.move();
     ball.getShape();

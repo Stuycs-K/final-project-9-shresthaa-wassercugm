@@ -46,8 +46,6 @@ public class Ball {
     if (pos.y < r+border){ pos.y = r+border; }
     if (pos.y > height-border-r){ pos.y = height-border-r; } 
     
-
-    //applyFriction();
   }
   
   PVector getForce(){

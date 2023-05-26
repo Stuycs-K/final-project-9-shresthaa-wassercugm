@@ -4,9 +4,10 @@ final int r = 16;
 int boardWidth;
 int boardHeight;
 int border;
-int aimBall = 0;
-float count;
-boolean ready = true; //indicates player can start aiming
+int aimBall;
+int ballStop;
+PVector endMouse;
+
 
 void drawTable() {
   stroke(0);
@@ -22,9 +23,10 @@ void setup() {
   boardHeight = 500;
   border = 50;
 
-  count = 0;
   balls = new ArrayList<Ball>();
-  ballStop = 0;
+  balls.add(cue);
+  aimBall = 0;
+  ballStop = 1;
 
   //other
   textAlign(CENTER);
@@ -44,32 +46,25 @@ boolean canPlace(Ball aBall) {
 }
 
 void mouseReleased() {
-  if (aimBall == 0) {
+  if (aimBall == 1 && ballStop == balls.size()) {
+    cue.setD(PVector.sub(endMouse, new PVector(mouseX, mouseY)));
     aimBall++;
-  } else if (ready&&aimBall==2) {
-    aimBall = 0;
   }
 }
 
-void mousePressed() {
-  System.out.println(aimBall);
-  if (aimBall == 0) {
-    aimBall = cue.press(mouseX, mouseY);
-    count += 10;
-    if(count > 100){
-      count = 1;
-    }
-    System.out.println(count);
+void mouseDragged() {
+  if(aimBall == 0 && ballStop == balls.size()){
+    endMouse = new PVector(mouseX, mouseY);
+    aimBall ++;
+  }else if (ballStop == balls.size()&&aimBall==2) {
+    aimBall = 0;
+  } else {
+    System.out.print("wait until simulation movement ends");
   }
 }
 
 void mouseClicked() {
-  if (aimBall == 1) {
-    aimBall = cue.press(mouseX, mouseY);
-    count = 0;
-    aimBall++;
-    ready = false;
-  } else if (aimBall == 2) {
+  if (aimBall == 2) {
     int x = mouseX;
     int y = mouseY;
     if (x < border+r) {
@@ -97,53 +92,39 @@ void mouseClicked() {
   }
 }
 
-//void mouseClicked(){
-//  int x = mouseX;
-//  int y = mouseY;
-//  if (x < border+r){ x = border+r; }
-//  if (x > width-border-r){ x = width-border-r; } 
-//  if (y < border+r){ y = border+r; }
-//  if (y > height-border-r){ y = height-border-r; }
-  
-//  boolean stripe = true;
-//  if (Math.random() < 0.5){stripe=false;}
-//  Ball toAdd = new Ball(x, y, stripe, balls.size()+1);
-  
-//  if (canPlace(toAdd)){
-//    balls.add(toAdd);
-//  }
-//}
-
 void draw() {
   drawTable();
-  /*if(!ready && ballStop == balls.size()){
-    ready = true;
-  }*/
-  if ((ready&&aimBall!=1) || (abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 )) {
-    cue.setVel(0, 0);
-    aimBall = 0;
-  } else {
-    cue.applyFriction();
-  }
-  cue.move();
-  cue.getShape();
+
+
   for (int i=0; i < balls.size(); i++) {
     Ball ball = balls.get(i);
-    
-    if ( abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
-      ball.setVel(0, 0);
-      ballStop++;
-    } else {
-       ballStop--;
+
+    if ((ballStop == balls.size()&&aimBall!=1) || (abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 )) {
+      cue.setVel(0, 0);
+      aimBall = 0;
+      ballStop = 0;
     }
-    
-    for (int j = i+1; j < balls.size(); j++){
+
+    if (abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
+      if (i == 0 && aimBall == 2) {
+        aimBall = 0;
+        ball.setVel(0, 0);
+        ballStop++;
+      } else if (i != 0 && ball.getV()!=new PVector(0,0)) {
+        ball.setVel(0, 0);
+        ballStop++;
+      }
+    } else {
+      ball.applyFriction(ball.getForce());
+    }
+
+    for (int j = i+1; j < balls.size(); j++) {
       Ball other = balls.get(j);
-      if (ball.isOverlapping(other)){
+      if (ball.isOverlapping(other)) {
         ball.collide(other);
       }
     }
-    
+
     ball.move();
     ball.getShape();
   }

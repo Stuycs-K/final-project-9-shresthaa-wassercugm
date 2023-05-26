@@ -1,37 +1,17 @@
 public class CueBall extends Ball {
-  PVector force; //start direction, will be implemented with spin
 
-  public CueBall(int x, int y) { //constructor
-    super(x, y, false, 8);
-    force = new PVector(0, 0);
+  public CueBall(float x, float y) { //constructor
+    super(x, y, false, -1);
     vel = new PVector(0, 0);
   }
-  
-  void applyFriction() {
-    force.div((float)m);
-    acc.add(force);
-    move();
+
+
+  void getShape() {
+    stroke(0);
+    fill(255);
+    circle(pos.x, pos.y, (float)r*2);
   }
 
-  int press(int x, int y) {
-    if (aimBall == 0) {
-      setD(getP().sub(new PVector(x, y)).normalize());
-    } else if (aimBall == 1) {
-      setS(count);
-    } else if (aimBall == 2) {
-      if (ready) {
-        cue.aim();
-        ready = true;
-      } else {
-        System.out.print("wait until simulation movement ends");
-      }
-    }
-    return aimBall;
-  }
-
-  void aim() {
-    move();
-  }
 
   void setP(PVector p) {
     pos = p;
@@ -39,10 +19,5 @@ public class CueBall extends Ball {
 
   void setD(PVector d) {
     vel = d;
-  }
-
-  void setS(float s) {
-    force.normalize();
-    force = getForce().mult(s/10);
   }
 }

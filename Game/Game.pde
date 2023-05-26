@@ -7,7 +7,6 @@ int border;
 int aimBall = 0;
 float count;
 boolean ready = true; //indicates player can start aiming
-int ballStop;
 
 void drawTable() {
   stroke(0);

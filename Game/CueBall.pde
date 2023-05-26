@@ -1,5 +1,5 @@
 public class CueBall extends Ball {
-  PVector direction, force; //start direction, will be implemented with spin
+  PVector force; //start direction, will be implemented with spin
 
   public CueBall(int x, int y) { //constructor
     super(x, y, false, 8);
@@ -30,7 +30,6 @@ public class CueBall extends Ball {
   }
 
   void aim() {
-    vel = direction;
     move();
   }
 
@@ -39,11 +38,10 @@ public class CueBall extends Ball {
   }
 
   void setD(PVector d) {
-    direction = d;
+    vel = d;
   }
 
   void setS(float s) {
-    vel = direction;
     force.normalize();
     force = getForce().mult(s/10);
   }

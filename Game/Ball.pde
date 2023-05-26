@@ -19,7 +19,7 @@ public class Ball {
 
   public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
-    vel = new PVector(0, -0);
+    vel = new PVector(0, 0);
     acc = new PVector(0, 0);
     isStriped = stripe;
     numBall = num;
@@ -138,7 +138,7 @@ public class Ball {
     return dist < 2*r;
   }
   
-  void setVel(float x, float y) {
+  void setV(float x, float y) {
     vel.set(x,y);
   }
   
@@ -148,5 +148,9 @@ public class Ball {
 
   PVector getV() {
     return vel;
+  }
+  
+  boolean isOnBoard(){
+    return onBoard;
   }
 }

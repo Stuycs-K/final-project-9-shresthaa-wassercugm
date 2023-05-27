@@ -139,7 +139,7 @@ void draw() {
   if (canShoot){
     drawArrow();
     // draw marker on power bar
-    fill(113,24,161);
+    fill(157, 5, 240);
     rect(1120, strength, 60, 8, 4);
     if (keyboardInput.isPressed(Controller.enter)){
       float power = (400 - (strength-100) )*0.0375 + 5;

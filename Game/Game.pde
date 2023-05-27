@@ -1,12 +1,13 @@
 ArrayList<Ball> balls;
+<<<<<<< HEAD
 CueBall cue = new CueBall(500, 500);
 final int r = 16;
 int boardWidth;
 int boardHeight;
 int border;
-int aimBall;
-int ballStop;
-PVector endMouse;
+boolean canShoot;
+PVector aimDirection; // should be kept normalized
+Controller keyboardInput;
 
 
 void drawTable() {
@@ -24,13 +25,18 @@ void setup() {
   border = 50;
 
   balls = new ArrayList<Ball>();
+  cue = new CueBall(550, 300);
   balls.add(cue);
-  aimBall = 0;
-  ballStop = 1;
-
+  
   //other
   textAlign(CENTER);
-
+  
+  canShoot = false;
+  
+  aimDirection = new PVector(0,1).normalize();
+  
+  keyboardInput = new Controller();
+  
   // draw table
   drawTable();
 }
@@ -45,87 +51,97 @@ boolean canPlace(Ball aBall) {
   return true;
 }
 
-void mouseReleased() {
-  if (aimBall == 1 && ballStop == balls.size()) {
-    cue.setD(PVector.sub(endMouse, new PVector(mouseX, mouseY)));
-    aimBall++;
+
+void mouseClicked(){
+  int x = mouseX;
+  int y = mouseY;
+  if (x < border+r){ x = border+r; }
+  if (x > width-border-r){ x = width-border-r; } 
+  if (y < border+r){ y = border+r; }
+  if (y > height-border-r){ y = height-border-r; }
+  
+  boolean stripe = true;
+  if (Math.random() < 0.5){stripe=false;}
+  Ball toAdd = new Ball(x, y, stripe, balls.size());
+  
+  if (canPlace(toAdd)){
+    balls.add(toAdd);
   }
 }
 
-void mouseDragged() {
-  if(aimBall == 0 && ballStop == balls.size()){
-    endMouse = new PVector(mouseX, mouseY);
-    aimBall ++;
-  }else if (ballStop == balls.size()&&aimBall==2) {
-    aimBall = 0;
-  } else {
-    System.out.print("wait until simulation movement ends");
+void mouseDragged(){
+  if (canShoot){
+   aimDirection = new PVector(mouseX - cue.getP().x, mouseY - cue.getP().y);
+   aimDirection.normalize();
   }
 }
 
-void mouseClicked() {
-  if (aimBall == 2) {
-    int x = mouseX;
-    int y = mouseY;
-    if (x < border+r) {
-      x = border+r;
-    }
-    if (x > width-border-r) {
-      x = width-border-r;
-    }
-    if (y < border+r) {
-      y = border+r;
-    }
-    if (y > height-border-r) {
-      y = height-border-r;
-    }
+void drawArrow(){
+  strokeWeight(4);
+  stroke(0);
+  float x1 = cue.getP().x;
+  float y1 = cue.getP().y;
+  float x2 = x1 + aimDirection.x*100;
+  float y2 = y1 + aimDirection.y*100;
+  line(x1, y1, x2, y2);
+  PVector normal = aimDirection.copy();
+  normal.rotate(PI/2);
+  fill(0);
+  triangle( x1 + aimDirection.x*110, y1 + aimDirection.y*110,
+            x2 + normal.x*5, y2 + normal.y * 5,
+            x2 - normal.x*5, y2 - normal.y * 5
+          );
+  strokeWeight(1);
+  
+}
 
-    boolean stripe = true;
-    if (Math.random() < 0.5) {
-      stripe=false;
-    }
-    Ball toAdd = new Ball(x, y, stripe, balls.size());
+void keyPressed() {
+  keyboardInput.press(keyCode);
+}
 
-    if (canPlace(toAdd)) {
-      balls.add(toAdd);
-    }
-  }
+void keyReleased() {
+  keyboardInput.release(keyCode);
 }
 
 void draw() {
   drawTable();
-
-
-  for (int i=0; i < balls.size(); i++) {
+  int stopped = 0;
+  
+  if (canShoot){
+    drawArrow();
+    if (keyboardInput.isPressed(Controller.enter)){
+      cue.setV( aimDirection.mult(10) );
+      canShoot = false;
+    }
+  }
+  
+  
+  for (int i = 0; i < balls.size(); i++) {
     Ball ball = balls.get(i);
-
-    if ((ballStop == balls.size()&&aimBall!=1) || (abs( cue.getV().x ) < 0.1 && abs( cue.getV().y ) < 0.1 )) {
-      cue.setVel(0, 0);
-      aimBall = 0;
-      ballStop = 0;
-    }
-
-    if (abs( ball.getV().x ) < 0.1 && abs( ball.getV().y ) < 0.1 ) {
-      if (i == 0 && aimBall == 2) {
-        aimBall = 0;
-        ball.setVel(0, 0);
-        ballStop++;
-      } else if (i != 0 && ball.getV()!=new PVector(0,0)) {
-        ball.setVel(0, 0);
-        ballStop++;
-      }
-    } else {
-      ball.applyFriction(ball.getForce());
-    }
-
-    for (int j = i+1; j < balls.size(); j++) {
+    
+    // apply collisions
+    for (int j = i+1; j < balls.size(); j++){
       Ball other = balls.get(j);
       if (ball.isOverlapping(other)) {
         ball.collide(other);
       }
     }
-
+    
+    // If the ball is moving, apply friction
+    if ( ball.getV().mag() < 0.05 ){
+      ball.setV(0,0);
+      stopped++;
+    }else{
+      ball.applyFriction(ball.getForce());
+    }
+    
     ball.move();
     ball.getShape();
   }
+  
+  if (stopped == balls.size()){
+    canShoot = true;
+  }
+  
+  
 }

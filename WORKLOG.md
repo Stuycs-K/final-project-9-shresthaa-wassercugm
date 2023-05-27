@@ -50,3 +50,7 @@ Tried a different model for handling collisions, but didn't work. Made progress 
 ### 5/26/23
 
 Finished working on collisions. Added new constructor to Ball to include color. Added a new controller class, and modified Game to add the ability to aim and shoot the cue ball.
+
+### 5/27/23
+
+Edited Ball and Game to implement a power bar that can control shot strength. 

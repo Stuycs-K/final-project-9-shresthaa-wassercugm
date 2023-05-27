@@ -20,9 +20,14 @@ Fixed friction with Maya. Also began working on the CueBall class, using mousePr
 
 Continued working on cueBall aiming and completed initial mouse controls and booleans/restrictions on aiming or creating new balls. Also began fixing move() and applyFriction() in order to use player controlled direction and strength(of aiming) variables rather than just gravitational force.
 
-### //
+### 5/26/23
 
---
+Started to revise cueBall aiming to use mouseDragged instead of mouseClicked or mouseReleased.
+
+
+### 5/27/23
+
+Revised Maya's version of aiming with mouseDragged to utilize the distance the mouse has been dragged in order to set the strength of the ball shot, with restrictions on minimum and maximum strength. draw() has also been modified to show these changes on the arrow, with the distance being the length of the aiming arrow(although the exact triangle shape has to be revised as at certain values of strength it looks off and isn't isosceles).
 
 ## Maya
 
@@ -44,4 +49,4 @@ Tried a different model for handling collisions, but didn't work. Made progress 
 
 ### 5/26/23
 
-Finished working on collisions. Added new constructor to Ball to include color. Added a new controller class, and modified Game to add the ability to aim and shoot the cue ball. 
+Finished working on collisions. Added new constructor to Ball to include color. Added a new controller class, and modified Game to add the ability to aim and shoot the cue ball.

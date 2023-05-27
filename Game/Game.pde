@@ -1,26 +1,49 @@
 ArrayList<Ball> balls;
 CueBall cue;
 final int r = 16;
+
+// for drawing the table (dimensions)
 int boardWidth;
 int boardHeight;
 int border;
+int sideBar;
+
+// for user interaction
 boolean canShoot;
+float strength = 500;
 PVector aimDirection; // should be kept normalized
 Controller keyboardInput;
 
 void drawTable(){
   stroke(0);
   fill(122,72,38);
-  rect(0,0, width, height);
+  rect(0,0, boardWidth+2*border, boardHeight+2*border);
   fill(41,163,33);
   rect(border, border, boardWidth, boardHeight);
 }
 
+void powerBar(){
+  fill(255);
+  textSize(25);
+  text("power", 1150, 50);
+  
+  noStroke();
+  color c1 = color(255,0,0);
+  color c2 = color(0,255,0);
+  for (float i = 0 ; i <= 1; i += 0.01){
+     fill( lerpColor(c1, c2, i) );
+     rect(1125, 100 + 400 * i, 50, 4);
+  }
+  
+}
+
 void setup() {
-  size(1100, 600);
+  size(1200, 600);
+  background(0);
   boardWidth = 1000;
   boardHeight = 500;
   border = 50;
+  sideBar = 100;
 
   balls = new ArrayList<Ball>();
   cue = new CueBall(550, 300);
@@ -37,6 +60,9 @@ void setup() {
   
   // draw table
   drawTable();
+  // draw power bar
+  powerBar();
+  
   
 }
 
@@ -68,8 +94,12 @@ void mouseClicked(){
 
 void mouseDragged(){
   if (canShoot){
-   aimDirection = new PVector(mouseX - cue.getP().x, mouseY - cue.getP().y);
-   aimDirection.normalize();
+    if (mouseX < boardWidth + 2*border){
+      aimDirection = new PVector(mouseX - cue.getP().x, mouseY - cue.getP().y);
+      aimDirection.normalize();
+    }else if (mouseX > 1125 && mouseX < 1175 && mouseY > 100 && mouseY < 500){
+      strength = mouseY;
+    }
   }
 }
 
@@ -101,13 +131,19 @@ void keyReleased() {
 }
 
 void draw() {
+  background(0);
+  powerBar();
   drawTable();
   int stopped = 0;
   
   if (canShoot){
     drawArrow();
+    // draw marker on power bar
+    fill(157, 5, 240);
+    rect(1120, strength, 60, 8, 4);
     if (keyboardInput.isPressed(Controller.enter)){
-      cue.setV( aimDirection.mult(10) );
+      float power = (400 - (strength-100) )*0.0375 + 5;
+      cue.setV( aimDirection.mult(power) );
       canShoot = false;
     }
   }

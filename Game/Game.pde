@@ -1,9 +1,14 @@
 ArrayList<Ball> balls;
 CueBall cue;
 final int r = 16;
+
+// for drawing the table (dimensions)
 int boardWidth;
 int boardHeight;
 int border;
+int sideBar;
+
+// for user interaction
 boolean canShoot;
 PVector aimDirection; // should be kept normalized
 Controller keyboardInput;
@@ -11,16 +16,18 @@ Controller keyboardInput;
 void drawTable(){
   stroke(0);
   fill(122,72,38);
-  rect(0,0, width, height);
+  rect(0,0, boardWidth+2*border, boardHeight+2*border);
   fill(41,163,33);
   rect(border, border, boardWidth, boardHeight);
 }
 
 void setup() {
-  size(1100, 600);
+  size(1200, 600);
+  background(0);
   boardWidth = 1000;
   boardHeight = 500;
   border = 50;
+  sideBar = 100;
 
   balls = new ArrayList<Ball>();
   cue = new CueBall(550, 300);
@@ -37,6 +44,10 @@ void setup() {
   
   // draw table
   drawTable();
+  // draw side bar
+  fill(255);
+  textSize(25);
+  text("power", 1150, 50);
   
 }
 

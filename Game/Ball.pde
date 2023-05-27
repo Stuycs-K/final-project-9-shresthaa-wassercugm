@@ -78,7 +78,7 @@ public class Ball {
     acc.set(0, 0);
     
     // bouncing
-    if (pos.x>=width-border-r||pos.x<=border+r) { 
+    if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
       vel.x *= -1;
     }
     if (pos.y>=height-border-r||pos.y<=border+r) {
@@ -87,7 +87,7 @@ public class Ball {
     
     // preventing high velocity balls from drawing on the border
     if (pos.x < r+border){ pos.x = r+border; }
-    if (pos.x > width-border-r){ pos.x = width-border-r; }
+    if (pos.x > width-border-sideBar-r){ pos.x = width-border-sideBar-r; }
     if (pos.y < r+border){ pos.y = r+border; }
     if (pos.y > height-border-r){ pos.y = height-border-r; } 
     
@@ -111,12 +111,16 @@ public class Ball {
 
   void getShape() {
     if (onBoard) {
+      // outer circle
       stroke(0);
       fill(col);
       circle(pos.x, pos.y, (float)r*2);
+      //inner circle
       fill(255);
       noStroke();
       circle(pos.x, pos.y, (float)r);
+      // number
+      textSize(12);
       fill(0);
       text(numBall, pos.x, pos.y+r/4);
       if (isStriped){

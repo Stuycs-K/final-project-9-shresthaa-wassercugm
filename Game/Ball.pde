@@ -1,20 +1,26 @@
-public class Ball {
-  PVector pos, vel, acc, force;
+public class Ball { //<>// //<>//
+  PVector pos, vel, acc;
   color col;
   int numBall;
-  // restrict numBall so doesn't overflow for mvp
-  //note: cueball has m = 0.17
-  // double friction;
-  //when moving cueball = up to 0.7!
-  boolean onBoard = true; //<>//
+  boolean onBoard = true;
   boolean isStriped;
+  final double m = 0.16; //kilograms
+  final double mu = 0.06;
+  final double G = 1.07; 
+  
+  public Ball(float x, float y, boolean stripe, color c, int num){
+    pos = new PVector(x,y);
+    vel = new PVector(0,0);
+    acc = new PVector(0,0);
+    isStriped = stripe;
+    col = c;
+    numBall = num;
+  }
 
-
-  public Ball(int x, int y, boolean stripe, int num) { //constructor
+  public Ball(float x, float y, boolean stripe, int num) { //constructor
     pos = new PVector(x, y);
     vel = new PVector(0, 0);
     acc = new PVector(0, 0);
-    force = new PVector(9.8*m,9.8*m);
     isStriped = stripe;
     numBall = num;
     col = color(random(255), random(255), random(255));
@@ -23,59 +29,106 @@ public class Ball {
     }
     //restrict green color from appearing and camouflage into background
   }
-
-
-  void collision(int numBalls, PVector direction, ArrayList<Ball> other) {
-    //friction = 0.06; //ignore friction for mvp
-    for (Ball ball : other) {
-      force = pos.sub(ball.getP());
-      force.normalize();
-      force.setMag((float)(9.8*m*m/pow(pos.dist(ball.getP()), 2)));
+  
+  // for testing purposes
+  public Ball(float x, float y, float vx, float vy, boolean stripe, int num) { //constructor
+    pos = new PVector(x, y);
+    vel = new PVector(vx, vy);
+    acc = new PVector(0, 0);
+    isStriped = stripe;
+    numBall = num;
+    col = color(random(255), random(255), random(255));
+    if (col == color(41, 163, 33)) {
+      col = color(244, 7, 7);
     }
+    //restrict green color from appearing and camouflage into background
+  }
+  
+  void fixOverlap(Ball other){
+    float overlap = 2*r - this.pos.dist(other.pos);
+    float dx = other.pos.x - this.pos.x;
+    float dy = other.pos.y - this.pos.y;
+    PVector fixOther = new PVector(dx, dy).normalize().mult(overlap/2);
+    PVector fixThis = new PVector(-dx, -dy).normalize().mult(overlap/2);
+    other.pos.add(fixOther);
+    pos.add(fixThis);
+  }
+  
+  
+
+  void collide(Ball other){
+    fixOverlap(other);
+     
+    float dx = other.pos.x - this.pos.x;
+    float dy = other.pos.y - this.pos.y;
+    float angle = atan2(dy,dx);
+    this.vel.rotate(angle);
+    other.vel.rotate(angle);
+    float temp = this.vel.x;
+    this.vel.x = other.vel.x;
+    other.vel.x = temp;
+    this.vel.rotate(-angle);
+    other.vel.rotate(-angle);
+        
   }
 
   void move() {
     vel.add(acc);
     pos.add(vel);
-    //a = F/m
-    applyFriction();
-    acc.add(PVector.div(force, m));
-    //must revise to all directions, no gravity(random?)
-    if (pos.x>=width-border-r||pos.x<=border+r) { //bounce
-      vel.x = -1;
-      acc.x = -1;
+    acc.set(0, 0);
+    
+    // bouncing
+    if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
+      vel.x *= -1;
     }
     if (pos.y>=height-border-r||pos.y<=border+r) {
       vel.y *= -1;
-      acc.y *= -1; //<>//
     }
-    //acceleration should be (-) eventually and vel should return to 0
+    
+    // preventing high velocity balls from drawing on the border
+    if (pos.x < r+border){ pos.x = r+border; }
+    if (pos.x > width-border-sideBar-r){ pos.x = width-border-sideBar-r; }
+    if (pos.y < r+border){ pos.y = r+border; }
+    if (pos.y > height-border-r){ pos.y = height-border-r; } 
+    
+
+    //applyFriction();
   }
-  //need to fix weird shadows when bouncing if vel is too fast(limit vel, fix movements)
+  
+  PVector getForce(){
+    double mag = mu * m * G;
+    PVector force = PVector.mult(vel, -1);
+    force.normalize();
+    force.mult( (float) mag );
+    return force;
+  }
 
 
-  void applyFriction() {
-    //Friction force = umg
-    /*float friction = 0.06*m*9.8;
-    force.x -= friction;
-    force.y -= friction;*/
+  void applyFriction(PVector f) {
+    f.div((float)m);
+    acc.add(f);
   }
 
   void getShape() {
     if (onBoard) {
+      // outer circle
       stroke(0);
       fill(col);
       circle(pos.x, pos.y, (float)r*2);
+      //inner circle
       fill(255);
       noStroke();
       circle(pos.x, pos.y, (float)r);
+      // number
+      textSize(12);
       fill(0);
       text(numBall, pos.x, pos.y+r/4);
-      if (isStriped) {
+      if (isStriped){
         stroke(0);
         fill(255);
         arc(pos.x, pos.y, (float)r*2, (float)r*2, PI/4, 3*PI/4, OPEN);
         arc(pos.x, pos.y, (float)r*2, (float)r*2, 5*PI/4, 7*PI/4, OPEN);
+        
       }
     }
   }
@@ -83,23 +136,29 @@ public class Ball {
   void goal() {
     onBoard = false;
   }
-
-  boolean isOverlapping(Ball other) {
-    double x = Math.pow(pos.x-other.pos.x, 2);
-    double y = Math.pow(pos.y-other.pos.y, 2);
-    double dist = Math.sqrt(x+y);
+  
+  boolean isOverlapping(Ball other){
+    double dist = dist(pos.x, pos.y, other.pos.x, other.pos.y);
     return dist < 2*r;
   }
-
-  void setVel(PVector v) {
+  
+  void setV(float x, float y) {
+    vel.set(x,y);
+  }
+  
+  void setV(PVector v) {
     vel = v;
   }
-
+  
   PVector getP() {
     return pos;
   }
 
   PVector getV() {
     return vel;
+  }
+  
+  boolean isOnBoard(){
+    return onBoard;
   }
 }

@@ -4,22 +4,22 @@ Anna Shrestha
 
 Maya Wassercug
 
-period 9
+Period 9
 
 group name: A(++++) Group
 
 ## Overview
-8 Ball pool is a game played with sixteen balls on a table with six holes (pockets). During the game, two players take turns hitting one of the balls (the solid white cue ball) with a stick. The goal of the game is to sink all of you balls into the hole, utilizing the collisions between the balls to do so. This simulation attempts to model the collisions between pool balls on a pool table, using the principles of friction, conservation of momentum, and conservation of energy (the collisions between the balls are assumed to be perfectly elastic). The simulation includes the ability to place balls on the table, aim the cue ball, and adjust the strength of the shot.
+8 Ball pool is a game played with a total of sixteen balls(one of which is the cue ball, the only ball that can be hit by players) and six holes(known as pockets) on a rectangular table. During the game, two players take turns hitting the cue ball with a stick(the cue). The aim of both players is to sink all of their balls(either striped or solid) into a hole, by utilizing the collisions between the balls. This simulation attempts to model the collisions between pool balls on a pool table using the principles of friction, conservation of momentum, and conservation of energy(where collisions between the balls are assumed to be perfectly elastic). The simulation includes the ability to place balls on the table, aim the cue ball, and adjust the strength of the shot(using a strength slider bar).
 
 ## Instructions
-Click to add new balls
+1. Click within the table to add new balls.
 
-Drag the mouse on the pool table to aim the cue ball
+2. Drag the mouse to angle the cue ball.
 
-Drag the mouse along the power bar on the right to adjust the strength of the shot
+3. Slide the mouse along the power bar(to the right of the table) to adjust the strength of the shot.
 
-Press enter to fire
+4. Press enter to fire the ball and watch the collisions.
 
-Once all of the balls are at rest, you will be able to aim the cue ball again!
+5. Once all of the balls have stopped, you will be able to aim the cue ball again!
 
-Press 1 to see a pre-designed template that sets up a standard break shot
+PS: Press 1 to see a pre-designed template that sets up a standard break shot, if you want to play the pool game instead of just a simulated movement of balls!(Note: You will not be able to place extra balls on the table unless you press 0 to return to normal interactive template)

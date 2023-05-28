@@ -9,7 +9,11 @@ Created the files with the outline of methods and all variables in ball(set fina
 
 ### 5/23/23
 
+<<<<<<< HEAD
+Apply move() in draw and test its functionality. Also revised movement by including acceleration as a factor and fixed issues with bouncing around borders. Used physics formulas to calculate force, acceleration, and velocity as well as friction force based on the friction coefficient of 0.06 although it still needs more testing.
+=======
 Apply move() in draw and test its functionality. Also revised movement by including acceleration as a factor and fixed issues with bouncing around borders. Used physics formulas to calculate force, acceleration, and velocity as well as friction force based on the friction coefficient of 0.06 although more testing is needed.
+>>>>>>> b23fbce7c7750afc3a7d026b82ecc9e0e116300c
 
 
 ### 5/24/23

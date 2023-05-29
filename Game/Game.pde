@@ -74,7 +74,7 @@ boolean canPlace(Ball aBall) {
 }
 
 void mouseClicked() {
-  if (keyboardInput.isPressed(2)) {
+  if (template!=1) {
     int x = mouseX;
     int y = mouseY;
     if (x < border+r) {

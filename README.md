@@ -22,4 +22,4 @@ group name: A(++++) Group
 
 5. Once all of the balls have stopped, you will be able to aim the cue ball again!
 
-PS: Press 1 to see a pre-designed template that sets up a standard break shot, if you want to play the pool game instead of just a simulated movement of balls! (Note: You will not be able to place extra balls on the table unless you press 0 to return to normal interactive template)
+PS: Press 1 to see a pre-designed template that sets up a standard break shot, if you want to play the pool game instead of just a simulated movement of balls! (Note: You will not be able to place extra balls on the table unless you press 2 to return to normal interactive template)

@@ -30,6 +30,10 @@ Revised Maya's version of aiming with mouseDragged to utilize the distance the m
 
 Started working on(and completed) the initial setup of balls, in a triangular rack. This will be the shortcut key to demostrate in our demo, and to play an actual game instead of a simulation. More templates may be added later on, along with instructions on how to play or aim the cue ball.
 
+### 5/29/23
+
+Add keyboard shortcuts to return to previous template(pressing 2 will allow mouse click to place balls, and escape from game).
+
 ## Maya
 
 ### 5/22/23

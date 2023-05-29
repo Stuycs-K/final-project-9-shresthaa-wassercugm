@@ -9,7 +9,7 @@ int border;
 int sideBar;
 
 // for user interaction
-boolean canShoot, canDraw;
+boolean canShoot;
 int template = 0;
 float strength = 500;
 PVector aimDirection; // should be kept normalized
@@ -53,7 +53,6 @@ void setup() {
   textAlign(CENTER);
 
   canShoot = false;
-  canDraw = true;
 
   aimDirection = new PVector(0, 1).normalize();
 
@@ -75,7 +74,7 @@ boolean canPlace(Ball aBall) {
 }
 
 void mouseClicked() {
-  if (canDraw) {
+  if (keyboardInput.isPressed(2)) {
     int x = mouseX;
     int y = mouseY;
     if (x < border+r) {
@@ -145,32 +144,40 @@ void draw() {
   powerBar();
   drawTable();
   int stopped = 0;
+  
+  if (keyboardInput.isPressed(2)&&template==1) {
+    keyboardInput.release(2);
+    template = 0;
+    balls = new ArrayList<Ball>();
+    //cue = new CueBall(550, 300);
+    balls.add(cue);
+  }
 
   //default pool start template(9 balls), can't create own balls
   if (keyboardInput.isPressed(1)&&template!=1) {
-    template = 1;
-    canDraw = false;
+    keyboardInput.release(2);
     balls = new ArrayList<Ball>();
     cue = new CueBall(border+boardWidth/4, height/2);
     balls.add(cue);
     balls.add(new Ball(width-sideBar-border-boardWidth/4-r/2-7, height/2+6, false, 1));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+r*sin(PI/6)-r/2-2, height/2+r/2+sin(PI/3)*r-r/2, true, 2));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+r*sin(PI/6)-r/2+4, height/2-r/2-sin(PI/3)*r+r/2-2, false, 3));
-    balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r+1, height/2+1,false, 8));
-    balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r, height/2+r/2+sin(PI/3)*2*r+1,false, 5));
+    balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r+1, height/2+1, false, 8));
+    balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r, height/2+r/2+sin(PI/3)*2*r+1, false, 5));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r, height/2-r/2-sin(PI/3)*2*r+2, true, 6));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+3*r*sin(PI/6)+2*r+5, height/2+r/2+sin(PI/3)*r-r/2+6, false, 7));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+3*r*sin(PI/6)+2*r+5, height/2-r/2-sin(PI/3)*r+r/2-2, true, 4));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+3*r*sin(PI/6)+2*r+4, height/2+r/2+sin(PI/3)*3*r+5, true, 10));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+3*r*sin(PI/6)+2*r+5, height/2-r/2-sin(PI/3)*3*r-1, false, 9));
-    balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2+1,false, 11));
-    balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2+r/2+sin(PI/3)*2*r+1,false, 13));
+    balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2+1, false, 11));
+    balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2+r/2+sin(PI/3)*2*r+1, false, 13));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2-r/2-sin(PI/3)*2*r+2, true, 12));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2+r/2+sin(PI/3)*4*r+1, true, 14));
     balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2-r/2-sin(PI/3)*4*r+1, false, 15));
     keyboardInput.release(1);
-    template = 0;
+    template = 1;
   }
+
 
   if (canShoot) {
     drawArrow();

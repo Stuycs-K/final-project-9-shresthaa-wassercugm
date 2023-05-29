@@ -145,7 +145,7 @@ void draw() {
   drawTable();
   int stopped = 0;
   
-  if (keyboardInput.isPressed(2)&&template==1) {
+  if (canShoot&&keyboardInput.isPressed(2)&&template==1) {
     keyboardInput.release(2);
     template = 0;
     balls = new ArrayList<Ball>();
@@ -154,7 +154,7 @@ void draw() {
   }
 
   //default pool start template(9 balls), can't create own balls
-  if (keyboardInput.isPressed(1)&&template!=1) {
+  if (canShoot&&keyboardInput.isPressed(1)&&template!=1) {
     keyboardInput.release(2);
     balls = new ArrayList<Ball>();
     cue = new CueBall(border+boardWidth/4, height/2);

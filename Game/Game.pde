@@ -22,13 +22,40 @@ void drawTable() {
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   fill(0);
-  //arc(boardWidth+border, border, 50, 50, 0, PI*11/8, CHORD);
-  //arc(boardWidth+border+5, border-5, 50, 50, 0, PI*2, CHORD);
-  rotate(PI/6);
-  translate((boardWidth+border)/2-sideBar,border/2-sideBar);
-  ellipse(width/2, height/2, 50, 60);
-  translate(-(boardWidth+border)/2+sideBar,-border/2+sideBar);
+  
+  //Upper left hole
+  translate(border,border);
   rotate(-PI/6);
+  ellipse(0, 0, 50, 60);
+  rotate(PI/6);
+  translate(-border,-border);
+  
+  //Upper middle hole
+  ellipse(boardWidth/2+border,border-5, 55, 60);
+  
+  //Upper right hole
+  translate(boardWidth+border,border);
+  rotate(PI/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI/6);
+  translate(-boardWidth-border,-border);
+  
+  //Bottom left hole
+  translate(border,boardHeight+border);
+  rotate(PI*7/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI*7/6);
+  translate(-border,-boardHeight-border);
+  
+  //Bottom middle hole
+  ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
+  
+  //Bottom right hole
+  translate(boardWidth+border,boardHeight+border);
+  rotate(PI*10/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI*10/6);
+  translate(-boardWidth-border,-boardHeight-border);
   noFill();
 }
 

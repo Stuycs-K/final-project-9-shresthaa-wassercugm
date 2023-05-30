@@ -59,3 +59,7 @@ Finished working on collisions. Added new constructor to Ball to include color. 
 ### 5/27/23
 
 Edited Ball and Game to implement a power bar that can control shot strength.
+
+### 5/30/23
+
+Started working on adding holes. Finished adding side holes, but still some bugs with the cue ball. 

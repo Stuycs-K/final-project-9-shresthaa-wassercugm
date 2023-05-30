@@ -21,6 +21,13 @@ void drawTable() {
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
+  
+  strokeWeight(10);
+  stroke(255);
+  line(522,50,578,50);
+  line(522,1050,578,1050);
+  strokeWeight(1);
+  stroke(0);
 }
 
 void powerBar() {
@@ -211,6 +218,7 @@ void draw() {
       ball.applyFriction(ball.getForce());
     }
 
+    ball.changeOnBoard();
     ball.move();
     ball.getShape();
   }

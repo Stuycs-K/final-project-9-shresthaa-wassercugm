@@ -161,4 +161,10 @@ public class Ball { //<>// //<>//
   boolean isOnBoard(){
     return onBoard;
   }
+  
+  void changeOnBoard(){
+    if ( pos.x > 522 && pos.x < 578 && (pos.y <= border || pos.y >= border + boardHeight) ){
+      onBoard = false;
+    }       
+  }
 }

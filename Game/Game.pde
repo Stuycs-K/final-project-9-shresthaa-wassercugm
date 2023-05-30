@@ -21,6 +21,15 @@ void drawTable() {
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
+  fill(0);
+  //arc(boardWidth+border, border, 50, 50, 0, PI*11/8, CHORD);
+  //arc(boardWidth+border+5, border-5, 50, 50, 0, PI*2, CHORD);
+  rotate(PI/6);
+  translate((boardWidth+border)/2-sideBar,border/2-sideBar);
+  ellipse(width/2, height/2, 50, 60);
+  translate(-(boardWidth+border)/2+sideBar,-border/2+sideBar);
+  rotate(-PI/6);
+  noFill();
 }
 
 void powerBar() {

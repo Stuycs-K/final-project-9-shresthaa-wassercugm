@@ -22,11 +22,9 @@ void drawTable() {
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   
-  strokeWeight(10);
   stroke(255);
   line(522,50,578,50);
-  line(522,1050,578,1050);
-  strokeWeight(1);
+  line(522,550,578,550);
   stroke(0);
 }
 

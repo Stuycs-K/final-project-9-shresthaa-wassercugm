@@ -77,22 +77,24 @@ public class Ball { //<>// //<>//
     pos.add(vel);
     acc.set(0, 0);
     
-    // bouncing
-    if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
-      vel.x *= -1;
-    }
-    if (pos.y>=height-border-r||pos.y<=border+r) {
-      vel.y *= -1;
-    }
     
-    // preventing high velocity balls from drawing on the border
-    if (pos.x < r+border){ pos.x = r+border; }
-    if (pos.x > width-border-sideBar-r){ pos.x = width-border-sideBar-r; }
-    if (pos.y < r+border){ pos.y = r+border; }
-    if (pos.y > height-border-r){ pos.y = height-border-r; } 
+    if (!bounceCheck()){
+       // bouncing
+      if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
+        vel.x *= -1;
+      }
+      if (pos.y>=height-border-r||pos.y<=border+r) {
+        vel.y *= -1;
+      }
+      
+      // preventing high velocity balls from drawing on the border
+      if (pos.x < r+border){ pos.x = r+border; }
+      if (pos.x > width-border-sideBar-r){ pos.x = width-border-sideBar-r; }
+      if (pos.y < r+border){ pos.y = r+border; }
+      if (pos.y > height-border-r){ pos.y = height-border-r; } 
+    }
     
 
-    //applyFriction();
   }
   
   PVector getForce(){
@@ -162,9 +164,14 @@ public class Ball { //<>// //<>//
     return onBoard;
   }
   
-  void changeOnBoard(){
-    if ( pos.x > 522 && pos.x < 578 && (pos.y <= border || pos.y >= border + boardHeight) ){
-      onBoard = false;
-    }       
+  boolean bounceCheck(){
+    return pos.x > 522 && pos.x < 578 && (pos.y <= border+r || pos.y >= border + boardHeight - r);
   }
+  
+  void changeOnBoard(){
+    if ( pos.x > 522 && pos.x < 578 && (pos.y <= border|| pos.y >= border + boardHeight) ){
+      onBoard = false;
+    }
+  }
+  
 }

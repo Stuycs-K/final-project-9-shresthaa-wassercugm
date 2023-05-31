@@ -112,8 +112,12 @@ boolean canPlace(Ball aBall) {
   return true;
 }
 
+boolean mouseOnTable(){
+  return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
+}
+
 void mouseClicked() {
-  if (template!=1) {
+  if (template!=1 && mouseOnTable()) {
     int x = mouseX;
     int y = mouseY;
     if (x < border+r) {
@@ -219,13 +223,19 @@ void draw() {
 
 
   if (canShoot) {
+    // reset cue ball
     if (!cue.isOnBoard()){
       cue.reset();
     }
+    
+    // draw aiming arrow
     drawArrow();
+    
     // draw marker on power bar
     fill(157, 5, 240);
     rect(1120, strength, 60, 8, 4);
+    
+    // fire when enter is pressed
     if (keyboardInput.isPressed(Controller.enter)) {
       float power = (400 - (strength-100) )*0.0375 + 5;
       cue.setV( aimDirection.mult(power) );

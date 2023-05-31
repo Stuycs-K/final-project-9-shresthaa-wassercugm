@@ -128,7 +128,6 @@ public class Ball { //<>// //<>//
         fill(255);
         arc(pos.x, pos.y, (float)r*2, (float)r*2, PI/4, 3*PI/4, OPEN);
         arc(pos.x, pos.y, (float)r*2, (float)r*2, 5*PI/4, 7*PI/4, OPEN);
-        
       }
     }
   }

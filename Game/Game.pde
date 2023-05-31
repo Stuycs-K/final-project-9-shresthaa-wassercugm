@@ -219,6 +219,9 @@ void draw() {
 
 
   if (canShoot) {
+    if (!cue.isOnBoard()){
+      cue.reset();
+    }
     drawArrow();
     // draw marker on power bar
     fill(157, 5, 240);
@@ -261,8 +264,5 @@ void draw() {
 
   if (stopped == balls.size()) {
     canShoot = true;
-  }
-  if (!cue.isOnBoard()){
-    cue.reset();
   }
 }

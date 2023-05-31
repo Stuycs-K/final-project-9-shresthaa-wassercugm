@@ -22,11 +22,11 @@ void drawTable() {
   fill(0);
   
   //Upper left hole
-  translate(border,border);
+  translate(border+5,border+5);
   rotate(-PI/6);
-  ellipse(0, 0, 50, 60);
+  ellipse(0, 0, 60, 70);
   rotate(PI/6);
-  translate(-border,-border);
+  translate(-border-5,-border-5);
   
   //Upper right hole
   translate(boardWidth+border,border);
@@ -58,6 +58,14 @@ void drawTable() {
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   noFill();
+  
+  translate(border,border+35);
+  line(0,0,35,-35);
+  translate(-border,-border-35);
+  
+  translate(border,border+35);
+  line(0,0,35,-35);
+  translate(-border,-border-35);
 
 }
 

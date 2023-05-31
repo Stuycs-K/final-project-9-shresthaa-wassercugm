@@ -49,23 +49,16 @@ void drawTable() {
   rotate(-PI*10/6);
   translate(-boardWidth-border,-boardHeight-border);
   
-  fill(41, 163, 33);
-  rect(border, border, boardWidth, boardHeight);
-  
-<<<<<<< HEAD
-  stroke(255);
-  line(522,50,578,50);
-  line(522,550,578,550);
-  stroke(0);
-=======
-  fill(0);
-  //Upper middle hole
+    //Upper middle hole
   ellipse(boardWidth/2+border,border-5, 55, 60);
   
   //Bottom middle hole
   ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
+  
+  fill(41, 163, 33);
+  rect(border, border, boardWidth, boardHeight);
   noFill();
->>>>>>> 9b12304b5c95258277adeb00f730d004200c5dd9
+
 }
 
 void powerBar() {

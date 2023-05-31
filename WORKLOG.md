@@ -24,15 +24,19 @@ Started to revise cueBall aiming to use mouseDragged instead of mouseClicked or 
 
 ### 5/27/23
 
-Revised Maya's version of aiming with mouseDragged to utilize the distance the mouse has been dragged in order to set the strength of the ball shot, with restrictions on minimum and maximum strength. draw() has also been modified to show these changes on the arrow, with the distance being the length of the aiming arrow(although the exact triangle shape has to be revised as at certain values of strength it looks off and isn't isosceles).
+Revised Maya's version of aiming with mouseDragged to utilize the distance the mouse has been dragged in order to set the strength of the ball shot, with restrictions on minimum and maximum strength. draw() has also been modified to show these changes on the arrow, with the distance being the length of the aiming arrow.
 
 ### 5/28/23
 
-Started working on(and completed) the initial setup of balls, in a triangular rack. This will be the shortcut key to demostrate in our demo, and to play an actual game instead of a simulation. More templates may be added later on, along with instructions on how to play or aim the cue ball.
+Completed the initial setup of balls, in a triangular rack. This will be the shortcut key to demonstrate in our demo, and to play an actual game instead of a simulation. More templates may be added later on, along with instructions on how to play or aim the cue ball.
 
 ### 5/29/23
 
 Add keyboard shortcuts to return to previous template(pressing 2 will allow mouse click to place balls, and escape from game).
+
+### 5/30/23
+
+Add the shape of holes, on the corners and middle of the table for a total of six holes(using rotate, translate, and ellipse commands).
 
 ## Maya
 
@@ -59,3 +63,7 @@ Finished working on collisions. Added new constructor to Ball to include color. 
 ### 5/27/23
 
 Edited Ball and Game to implement a power bar that can control shot strength.
+
+### 5/30/23
+
+Started working on adding holes. Finished adding side holes, but still some bugs with the cue ball.

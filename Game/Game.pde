@@ -19,13 +19,53 @@ void drawTable() {
   stroke(0);
   fill(122, 72, 38);
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
+  fill(0);
+  
+  //Upper left hole
+  translate(border,border);
+  rotate(-PI/6);
+  ellipse(0, 0, 50, 60);
+  rotate(PI/6);
+  translate(-border,-border);
+  
+  //Upper right hole
+  translate(boardWidth+border,border);
+  rotate(PI/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI/6);
+  translate(-boardWidth-border,-border);
+  
+  //Bottom left hole
+  translate(border,boardHeight+border);
+  rotate(PI*7/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI*7/6);
+  translate(-border,-boardHeight-border);
+  
+  //Bottom right hole
+  translate(boardWidth+border,boardHeight+border);
+  rotate(PI*10/6);
+  ellipse(0, 0, 50, 60);
+  rotate(-PI*10/6);
+  translate(-boardWidth-border,-boardHeight-border);
+  
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   
+<<<<<<< HEAD
   stroke(255);
   line(522,50,578,50);
   line(522,550,578,550);
   stroke(0);
+=======
+  fill(0);
+  //Upper middle hole
+  ellipse(boardWidth/2+border,border-5, 55, 60);
+  
+  //Bottom middle hole
+  ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
+  noFill();
+>>>>>>> 9b12304b5c95258277adeb00f730d004200c5dd9
 }
 
 void powerBar() {
@@ -38,6 +78,7 @@ void powerBar() {
   color c2 = color(0, 255, 0);
   for (float i = 0; i <= 1; i += 0.01) {
     fill( lerpColor(c1, c2, i) );
+    
     rect(1125, 100 + 400 * i, 50, 4);
   }
 }

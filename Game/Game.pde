@@ -49,16 +49,16 @@ void drawTable() {
   rotate(-PI*10/6);
   translate(-boardWidth-border,-boardHeight-border);
   
-  fill(41, 163, 33);
-  rect(border, border, boardWidth, boardHeight);
-  
-  fill(0);
-  //Upper middle hole
+    //Upper middle hole
   ellipse(boardWidth/2+border,border-5, 55, 60);
   
   //Bottom middle hole
   ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
+  
+  fill(41, 163, 33);
+  rect(border, border, boardWidth, boardHeight);
   noFill();
+
 }
 
 void powerBar() {
@@ -233,25 +233,30 @@ void draw() {
 
   for (int i = 0; i < balls.size(); i++) {
     Ball ball = balls.get(i);
-
-    // apply collisions
-    for (int j = i+1; j < balls.size(); j++) {
-      Ball other = balls.get(j);
-      if (ball.isOverlapping(other)) {
-        ball.collide(other);
+    
+    if (ball.isOnBoard()){
+      // apply collisions
+      for (int j = i+1; j < balls.size(); j++) {
+        Ball other = balls.get(j);
+        if (ball.isOverlapping(other)) {
+          ball.collide(other);
+        }
       }
-    }
-
-    // If the ball is moving, apply friction
-    if ( ball.getV().mag() < 0.05 ) {
-      ball.setV(0, 0);
+  
+      // If the ball is moving, apply friction
+      if ( ball.getV().mag() < 0.05 ) {
+        ball.setV(0, 0);
+        stopped++;
+      } else {
+        ball.applyFriction(ball.getForce());
+      }
+  
+      ball.changeOnBoard();
+      ball.move();
+      ball.getShape();
+    }else{
       stopped++;
-    } else {
-      ball.applyFriction(ball.getForce());
     }
-
-    ball.move();
-    ball.getShape();
   }
 
   if (stopped == balls.size()) {

@@ -1,4 +1,4 @@
-public class Ball { //<>// //<>//
+public class Ball { //<>// //<>// //<>//
   PVector pos, vel, acc;
   color col;
   int numBall;
@@ -62,13 +62,13 @@ public class Ball { //<>// //<>//
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;
     float angle = atan2(dy,dx);
-    this.vel.rotate(angle);
-    other.vel.rotate(angle);
+    this.vel.rotate(-angle);
+    other.vel.rotate(-angle);
     float temp = this.vel.x;
     this.vel.x = other.vel.x;
     other.vel.x = temp;
-    this.vel.rotate(-angle);
-    other.vel.rotate(-angle);
+    this.vel.rotate(angle);
+    other.vel.rotate(angle);
         
   }
 
@@ -153,6 +153,14 @@ public class Ball { //<>// //<>//
   
   PVector getP() {
     return pos;
+  }
+  
+  void setOnBoard(boolean b){
+    onBoard = b;
+  }
+  
+  void setP(float x, float y){
+    pos = new PVector(x,y);
   }
 
   PVector getV() {

@@ -262,4 +262,7 @@ void draw() {
   if (stopped == balls.size()) {
     canShoot = true;
   }
+  if (!cue.isOnBoard()){
+    cue.reset();
+  }
 }

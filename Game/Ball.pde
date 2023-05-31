@@ -172,11 +172,19 @@ public class Ball { //<>// //<>// //<>//
   }
   
   boolean bounceCheck(){
-    return pos.x > 522 && pos.x < 578 && (pos.y <= border+r || pos.y >= border + boardHeight - r);
+    float x = pos.x;
+    float y = pos.y;
+    boolean mid = x > 522 && x < 578;
+    boolean left = x < 85 && (y < 85 || y > 515);
+    return mid || left;
   }
   
   void changeOnBoard(){
-    if ( pos.x > 522 && pos.x < 578 && (pos.y <= border|| pos.y >= border + boardHeight) ){
+    float x = pos.x;
+    float y = pos.y;
+    boolean mid =  x > 522 && x < 578 && (y <= border || y >= border + boardHeight);
+    boolean left = x > 50 && x < 85 && (y < -x + 135 || y > x + 456);
+    if (mid || left) {
       onBoard = false;
     }
   }

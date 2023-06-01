@@ -75,3 +75,7 @@ Edited Ball and Game to implement a power bar that can control shot strength.
 ### 5/30/23
 
 Started working on adding holes. Finished adding side holes, but still some bugs with the cue ball.
+
+### 5/31/23
+
+finished working on the side holes. Started working on the corner holes. 

@@ -86,7 +86,7 @@ void drawTable() {
   boardWidth+border*3/2+8*cos(PI/6), border+boardHeight/2, boardWidth+border*3/2, border+boardHeight/2+8*sin(PI/6));
   
   quad(boardWidth+border*3/2-8*cos(PI/6), border+boardHeight*3/4, boardWidth+border*3/2, border+boardHeight*3/4-8*sin(PI/6),
-  boardWidth+border*3/2+8*cos(PI/6), border+boardHeight*3/4, boardWidth+border*3/2, border+boardHeight*3/4+s(PI/6));
+  boardWidth+border*3/2+8*cos(PI/6), border+boardHeight*3/4, boardWidth+border*3/2, border+boardHeight*3/4+8*(PI/6));
   
   fill(0);
   stroke(0);
@@ -128,25 +128,7 @@ void drawTable() {
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   noFill();
-  
-  stroke(255);
-  translate(border,border+35);
-  line(0,0,35,-35);
-  translate(-border,-border-35);
-  
-  translate(border+boardWidth,border+35);
-  line(0,0,-35,-35);
-  translate(-border-boardWidth,-border-35);
-  
-  
-  translate(border,border+boardHeight-35);
-  line(0,0,35,35);
-  translate(-border,-border-boardHeight+35);
-  
-  
-  translate(border+boardWidth-35,border+boardHeight);
-  line(0,0,35,-35);
-  translate(-border-boardWidth+35,-border-boardHeight);
+
 }
 
 void powerBar() {

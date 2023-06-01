@@ -21,33 +21,33 @@ void drawTable() {
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
   fill(0);
   
-  //Upper left hole
-  translate(border,border);
-  rotate(-PI/6);
-  ellipse(0, 0, 50, 60);
-  rotate(PI/6);
-  translate(-border,-border);
+  ////Upper left hole
+  //translate(border,border);
+  //rotate(-PI/6);
+  //ellipse(0, 0, 50, 60);
+  //rotate(PI/6);
+  //translate(-border,-border);
   
-  //Upper right hole
-  translate(boardWidth+border,border);
-  rotate(PI/6);
-  ellipse(0, 0, 50, 60);
-  rotate(-PI/6);
-  translate(-boardWidth-border,-border);
+  ////Upper right hole
+  //translate(boardWidth+border,border);
+  //rotate(PI/6);
+  //ellipse(0, 0, 50, 60);
+  //rotate(-PI/6);
+  //translate(-boardWidth-border,-border);
   
-  //Bottom left hole
-  translate(border,boardHeight+border);
-  rotate(PI*7/6);
-  ellipse(0, 0, 50, 60);
-  rotate(-PI*7/6);
-  translate(-border,-boardHeight-border);
+  ////Bottom left hole
+  //translate(border,boardHeight+border);
+  //rotate(PI*7/6);
+  //ellipse(0, 0, 50, 60);
+  //rotate(-PI*7/6);
+  //translate(-border,-boardHeight-border);
   
-  //Bottom right hole
-  translate(boardWidth+border,boardHeight+border);
-  rotate(PI*10/6);
-  ellipse(0, 0, 50, 60);
-  rotate(-PI*10/6);
-  translate(-boardWidth-border,-boardHeight-border);
+  ////Bottom right hole
+  //translate(boardWidth+border,boardHeight+border);
+  //rotate(PI*10/6);
+  //ellipse(0, 0, 50, 60);
+  //rotate(-PI*10/6);
+  //translate(-boardWidth-border,-boardHeight-border);
   
     //Upper middle hole
   ellipse(boardWidth/2+border,border-5, 55, 60);
@@ -58,6 +58,10 @@ void drawTable() {
   fill(41, 163, 33);
   rect(border, border, boardWidth, boardHeight);
   noFill();
+  
+  stroke(255);
+  line(50,85,85,50);
+  line(50,515,85,550);
 
 }
 

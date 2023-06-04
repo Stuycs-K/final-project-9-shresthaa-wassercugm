@@ -78,7 +78,7 @@ public class Ball { //<>// //<>// //<>//
     acc.set(0, 0);
     
     
-    if (!bounceCheck()){
+    if (bounceCheck()){
        // bouncing
       if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
         vel.x *= -1;
@@ -175,8 +175,8 @@ public class Ball { //<>// //<>// //<>//
     float x = pos.x;
     float y = pos.y;
     boolean mid = x > 522 && x < 578;
-    boolean left = x < 85 && (y < 85 || y > 515);
-    return mid || left;
+    boolean corner = (x < 85 || x > 1015) && (y < 85 || y > 515);
+    return !(mid || corner);
   }
   
   void changeOnBoard(){
@@ -184,7 +184,8 @@ public class Ball { //<>// //<>// //<>//
     float y = pos.y;
     boolean mid =  x > 522 && x < 578 && (y <= border || y >= border + boardHeight);
     boolean left = x > 50 && x < 85 && (y < -x + 135 || y > x + 456);
-    if (mid || left) {
+    boolean right = x > 1015 && x < 1050 && (y < x - 965 || y > -x + 1565);
+    if (mid || left || right) {
       onBoard = false;
     }
   }

@@ -78,4 +78,8 @@ Started working on adding holes. Finished adding side holes, but still some bugs
 
 ### 5/31/23
 
-finished working on the side holes. Started working on the corner holes. 
+Finished working on the side holes. Started working on the corner holes.
+
+### 6/4/23
+
+Finished implementing the holes, and modified the graphics. 

@@ -17,8 +17,12 @@ Controller keyboardInput;
 
 void drawTable() {
   stroke(0);
+  
   fill(122, 72, 38);
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
+  
+  fill(41, 163, 33);
+  rect(border, border, boardWidth, boardHeight);
   
   stroke(255);
   fill(255);
@@ -91,43 +95,37 @@ void drawTable() {
   fill(0);
   stroke(0);
   
-  //Upper left hole
-  translate(border+6,border+4);
-  rotate(-PI/6);
-  ellipse(0, 0, 60, 70);
-  rotate(PI/6);
-  translate(-border-6,-border-4);
+  // middle holes
+  arc(550, 50, 56, 60, PI, 2*PI, OPEN);
+  arc(550, 550, 56, 60, 0, PI, OPEN);
   
-  //Upper right hole
-  translate(boardWidth+border-5,border+4);
-  rotate(PI/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI/6);
-  translate(-boardWidth-border+5,-border-4);
+  // top left corner 
+  translate(67.5, 67.5);
+  rotate(-PI/4);
+  arc(0, 0, 50, 80, PI, 2*PI, OPEN); 
+  rotate(PI/4);
+  translate(-67.5, -67.5);
   
-  //Bottom left hole
-  translate(border+6,boardHeight+border-2);
-  rotate(PI*7/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI*7/6);
-  translate(-border-6,-boardHeight-border+2);
+  // bottom left corner
+  translate(67.5, 532.5);
+  rotate(PI/4);
+  arc(0, 0, 50, 80, 0, PI, OPEN);
+  rotate(PI/-4);
+  translate(-67.5, -532.5);
   
-  //Bottom right hole
-  translate(boardWidth+border-2,boardHeight+border-4);
-  rotate(PI*10/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI*10/6);
-  translate(-boardWidth-border+2,-boardHeight-border+4);
+  // top right corner
+  translate(1032.5, 67.5);
+  rotate(PI/4);
+  arc(0, 0, 50, 80, PI, 2*PI, OPEN);
+  rotate(-PI/4);
+  translate(-1032.5, -67.5);
   
-    //Upper middle hole
-  ellipse(boardWidth/2+border,border-5, 55, 60);
-  
-  //Bottom middle hole
-  ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
-  
-  fill(41, 163, 33);
-  rect(border, border, boardWidth, boardHeight);
-  noFill();
+  // bottom right hole
+  translate(1032.5, 532.5);
+  rotate(-PI/4);
+  arc(0, 0, 50, 80, 0, PI, OPEN);
+  rotate(PI/4);
+  translate(-1032.5, -532.5);
 
 }
 
@@ -182,8 +180,12 @@ boolean canPlace(Ball aBall) {
   return true;
 }
 
+boolean mouseOnTable(){
+  return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
+}
+
 void mouseClicked() {
-  if (template!=1) {
+  if (template!=1 && mouseOnTable()) {
     int x = mouseX;
     int y = mouseY;
     if (x < border+r) {
@@ -289,10 +291,19 @@ void draw() {
 
 
   if (canShoot) {
+    // reset cue ball
+    if (!cue.isOnBoard()){
+      cue.reset();
+    }
+    
+    // draw aiming arrow
     drawArrow();
+    
     // draw marker on power bar
     fill(157, 5, 240);
     rect(1120, strength, 60, 8, 4);
+    
+    // fire when enter is pressed
     if (keyboardInput.isPressed(Controller.enter)) {
       float power = (400 - (strength-100) )*0.0375 + 5;
       cue.setV( aimDirection.mult(power) );

@@ -1,4 +1,4 @@
-public class Ball { //<>// //<>//
+public class Ball { //<>// //<>// //<>//
   PVector pos, vel, acc;
   color col;
   int numBall;
@@ -62,13 +62,13 @@ public class Ball { //<>// //<>//
     float dx = other.pos.x - this.pos.x;
     float dy = other.pos.y - this.pos.y;
     float angle = atan2(dy,dx);
-    this.vel.rotate(angle);
-    other.vel.rotate(angle);
+    this.vel.rotate(-angle);
+    other.vel.rotate(-angle);
     float temp = this.vel.x;
     this.vel.x = other.vel.x;
     other.vel.x = temp;
-    this.vel.rotate(-angle);
-    other.vel.rotate(-angle);
+    this.vel.rotate(angle);
+    other.vel.rotate(angle);
         
   }
 
@@ -78,7 +78,7 @@ public class Ball { //<>// //<>//
     acc.set(0, 0);
     
     
-    if (!bounceCheck()){
+    if (bounceCheck()){
        // bouncing
       if (pos.x>=width-border-sideBar-r||pos.x<=border+r) { 
         vel.x *= -1;
@@ -154,6 +154,14 @@ public class Ball { //<>// //<>//
   PVector getP() {
     return pos;
   }
+  
+  void setOnBoard(boolean b){
+    onBoard = b;
+  }
+  
+  void setP(float x, float y){
+    pos = new PVector(x,y);
+  }
 
   PVector getV() {
     return vel;
@@ -164,11 +172,20 @@ public class Ball { //<>// //<>//
   }
   
   boolean bounceCheck(){
-    return pos.x > 522 && pos.x < 578 && (pos.y <= border+r || pos.y >= border + boardHeight - r);
+    float x = pos.x;
+    float y = pos.y;
+    boolean mid = x > 522 && x < 578;
+    boolean corner = (x < 85 || x > 1015) && (y < 85 || y > 515);
+    return !(mid || corner);
   }
   
   void changeOnBoard(){
-    if ( pos.x > 522 && pos.x < 578 && (pos.y <= border|| pos.y >= border + boardHeight) ){
+    float x = pos.x;
+    float y = pos.y;
+    boolean mid =  x > 522 && x < 578 && (y <= border || y >= border + boardHeight);
+    boolean left = x > 50 && x < 85 && (y < -x + 135 || y > x + 456);
+    boolean right = x > 1015 && x < 1050 && (y < x - 965 || y > -x + 1565);
+    if (mid || left || right) {
       onBoard = false;
     }
   }

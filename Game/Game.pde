@@ -17,8 +17,12 @@ Controller keyboardInput;
 
 void drawTable() {
   stroke(0);
+  
   fill(122, 72, 38);
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
+  
+  fill(41, 163, 33);
+  rect(border, border, boardWidth, boardHeight);
   
   stroke(255);
   fill(255);
@@ -90,48 +94,38 @@ void drawTable() {
   
   fill(0);
   stroke(0);
-
-  //Upper left hole
-  translate(border+6,border+4);
-  rotate(-PI/6);
-  ellipse(0, 0, 60, 70);
-  rotate(PI/6);
-  translate(-border-6,-border-4);
   
-  //Upper right hole
-  translate(boardWidth+border-5,border+4);
-  rotate(PI/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI/6);
-  translate(-boardWidth-border+5,-border-4);
+  // middle holes
+  arc(550, 50, 56, 60, PI, 2*PI, OPEN);
+  arc(550, 550, 56, 60, 0, PI, OPEN);
   
-  //Bottom left hole
-  translate(border+6,boardHeight+border-2);
-  rotate(PI*7/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI*7/6);
-  translate(-border-6,-boardHeight-border+2);
+  // top left corner 
+  translate(67.5, 67.5);
+  rotate(-PI/4);
+  arc(0, 0, 50, 80, PI, 2*PI, OPEN); 
+  rotate(PI/4);
+  translate(-67.5, -67.5);
   
-  //Bottom right hole
-  translate(boardWidth+border-2,boardHeight+border-4);
-  rotate(PI*10/6);
-  ellipse(0, 0, 60, 70);
-  rotate(-PI*10/6);
-  translate(-boardWidth-border+2,-boardHeight-border+4);
+  // bottom left corner
+  translate(67.5, 532.5);
+  rotate(PI/4);
+  arc(0, 0, 50, 80, 0, PI, OPEN);
+  rotate(PI/-4);
+  translate(-67.5, -532.5);
   
-    //Upper middle hole
-  ellipse(boardWidth/2+border,border-5, 55, 60);
+  // top right corner
+  translate(1032.5, 67.5);
+  rotate(PI/4);
+  arc(0, 0, 50, 80, PI, 2*PI, OPEN);
+  rotate(-PI/4);
+  translate(-1032.5, -67.5);
   
-  //Bottom middle hole
-  ellipse(boardWidth/2+border,boardHeight+border+5, 55, 60);
-  
-  fill(41, 163, 33);
-  rect(border, border, boardWidth, boardHeight);
-  noFill();
-  
-  stroke(255);
-  line(50,85,85,50);
-  line(50,515,85,550);
+  // bottom right hole
+  translate(1032.5, 532.5);
+  rotate(-PI/4);
+  arc(0, 0, 50, 80, 0, PI, OPEN);
+  rotate(PI/4);
+  translate(-1032.5, -532.5);
 
 }
 

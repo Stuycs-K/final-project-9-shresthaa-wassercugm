@@ -32,11 +32,19 @@ Completed the initial setup of balls, in a triangular rack. This will be the sho
 
 ### 5/29/23
 
-Add keyboard shortcuts to return to previous template(pressing 2 will allow mouse click to place balls, and escape from game).
+Added keyboard shortcuts to return to previous template(pressing 2 will allow mouse click to place balls, and escape from game).
 
 ### 5/30/23
 
-Add the shape of holes, on the corners and middle of the table for a total of six holes(using rotate, translate, and ellipse commands).
+Added the shape of holes, on the corners and middle of the table for a total of six holes(using rotate, translate, and ellipse commands).
+
+### 5/31/23
+
+Revised holes so it's easier to implement interaction with balls. Also rehearsed for demo and looked for errors in programming.
+
+### 6/1/23
+
+Completed hole revisions and added dots on the edges of the table to make it more realistic.
 
 ## Maya
 
@@ -67,3 +75,7 @@ Edited Ball and Game to implement a power bar that can control shot strength.
 ### 5/30/23
 
 Started working on adding holes. Finished adding side holes, but still some bugs with the cue ball.
+
+### 5/31/23
+
+finished working on the side holes. Started working on the corner holes. 

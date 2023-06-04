@@ -19,35 +19,105 @@ void drawTable() {
   stroke(0);
   fill(122, 72, 38);
   rect(0, 0, boardWidth+2*border, boardHeight+2*border);
+  
+  stroke(255);
+  fill(255);
+  //upper dots
+  quad(boardWidth/8+border-8*sin(PI/6), border/2, boardWidth/8+border, border/2-8*cos(PI/6),
+  boardWidth/8+border+8*sin(PI/6), border/2, boardWidth/8+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth/4+border-8*sin(PI/6), border/2, boardWidth/4+border, border/2-8*cos(PI/6),
+  boardWidth/4+border+8*sin(PI/6), border/2, boardWidth/4+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth/4+border-8*sin(PI/6), border/2, boardWidth/4+border, border/2-8*cos(PI/6),
+  boardWidth/4+border+8*sin(PI/6), border/2, boardWidth/4+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth*3/8+border-8*sin(PI/6), border/2, boardWidth*3/8+border, border/2-8*cos(PI/6),
+  boardWidth*3/8+border+8*sin(PI/6), border/2, boardWidth*3/8+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth*5/8+border-8*sin(PI/6), border/2, boardWidth*5/8+border, border/2-8*cos(PI/6),
+  boardWidth*5/8+border+8*sin(PI/6), border/2, boardWidth*5/8+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth*3/4+border-8*sin(PI/6), border/2, boardWidth*3/4+border, border/2-8*cos(PI/6),
+  boardWidth*3/4+border+8*sin(PI/6), border/2, boardWidth*3/4+border, border/2+8*cos(PI/6));
+  
+  quad(boardWidth*7/8+border-8*sin(PI/6), border/2, boardWidth*7/8+border, border/2-8*cos(PI/6),
+  boardWidth*7/8+border+8*sin(PI/6), border/2, boardWidth*7/8+border, border/2+8*cos(PI/6));
+  
+  //bottom dots
+  quad(boardWidth/8+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth/8+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth/8+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth/8+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth/4+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth/4+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth/4+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth/4+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth/4+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth/4+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth/4+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth/4+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth*3/8+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth*3/8+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth*3/8+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth*3/8+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth*5/8+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth*5/8+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth*5/8+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth*5/8+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth*3/4+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth*3/4+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth*3/4+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth*3/4+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  quad(boardWidth*7/8+border-8*sin(PI/6), boardHeight+border*3/2, boardWidth*7/8+border, boardHeight+border*3/2-8*cos(PI/6),
+  boardWidth*7/8+border+8*sin(PI/6), boardHeight+border*3/2, boardWidth*7/8+border, boardHeight+border*3/2+8*cos(PI/6));
+  
+  //left dots
+  quad(border/2-8*cos(PI/6), border+boardHeight/4, border/2, border+boardHeight/4-8*sin(PI/6),
+  border/2+8*cos(PI/6), border+boardHeight/4, border/2, border+boardHeight/4+8*sin(PI/6));
+  
+  
+  quad(border/2-8*cos(PI/6), border+boardHeight/2, border/2, border+boardHeight/2-8*sin(PI/6),
+  border/2+8*cos(PI/6), border+boardHeight/2, border/2, border+boardHeight/2+8*sin(PI/6));
+  
+  quad(border/2-8*cos(PI/6), border+boardHeight*3/4, border/2, border+boardHeight*3/4-8*sin(PI/6),
+  border/2+8*cos(PI/6), border+boardHeight*3/4, border/2, border+boardHeight*3/4+8*sin(PI/6));
+  
+  //right dots
+  quad(boardWidth+border*3/2-8*cos(PI/6), border+boardHeight/4, boardWidth+border*3/2, border+boardHeight/4-8*sin(PI/6),
+  boardWidth+border*3/2+8*cos(PI/6), border+boardHeight/4, boardWidth+border*3/2, border+boardHeight/4+8*sin(PI/6));
+  
+  
+  quad(boardWidth+border*3/2-8*cos(PI/6), border+boardHeight/2, boardWidth+border*3/2, border+boardHeight/2-8*sin(PI/6),
+  boardWidth+border*3/2+8*cos(PI/6), border+boardHeight/2, boardWidth+border*3/2, border+boardHeight/2+8*sin(PI/6));
+  
+  quad(boardWidth+border*3/2-8*cos(PI/6), border+boardHeight*3/4, boardWidth+border*3/2, border+boardHeight*3/4-8*sin(PI/6),
+  boardWidth+border*3/2+8*cos(PI/6), border+boardHeight*3/4, boardWidth+border*3/2, border+boardHeight*3/4+8*(PI/6));
+  
   fill(0);
+  stroke(0);
+
+  //Upper left hole
+  translate(border+6,border+4);
+  rotate(-PI/6);
+  ellipse(0, 0, 60, 70);
+  rotate(PI/6);
+  translate(-border-6,-border-4);
   
-  ////Upper left hole
-  //translate(border,border);
-  //rotate(-PI/6);
-  //ellipse(0, 0, 50, 60);
-  //rotate(PI/6);
-  //translate(-border,-border);
+  //Upper right hole
+  translate(boardWidth+border-5,border+4);
+  rotate(PI/6);
+  ellipse(0, 0, 60, 70);
+  rotate(-PI/6);
+  translate(-boardWidth-border+5,-border-4);
   
-  ////Upper right hole
-  //translate(boardWidth+border,border);
-  //rotate(PI/6);
-  //ellipse(0, 0, 50, 60);
-  //rotate(-PI/6);
-  //translate(-boardWidth-border,-border);
+  //Bottom left hole
+  translate(border+6,boardHeight+border-2);
+  rotate(PI*7/6);
+  ellipse(0, 0, 60, 70);
+  rotate(-PI*7/6);
+  translate(-border-6,-boardHeight-border+2);
   
-  ////Bottom left hole
-  //translate(border,boardHeight+border);
-  //rotate(PI*7/6);
-  //ellipse(0, 0, 50, 60);
-  //rotate(-PI*7/6);
-  //translate(-border,-boardHeight-border);
-  
-  ////Bottom right hole
-  //translate(boardWidth+border,boardHeight+border);
-  //rotate(PI*10/6);
-  //ellipse(0, 0, 50, 60);
-  //rotate(-PI*10/6);
-  //translate(-boardWidth-border,-boardHeight-border);
+  //Bottom right hole
+  translate(boardWidth+border-2,boardHeight+border-4);
+  rotate(PI*10/6);
+  ellipse(0, 0, 60, 70);
+  rotate(-PI*10/6);
+  translate(-boardWidth-border+2,-boardHeight-border+4);
   
     //Upper middle hole
   ellipse(boardWidth/2+border,border-5, 55, 60);

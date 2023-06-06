@@ -217,4 +217,8 @@ public class Ball { //<>// //<>// //<>//
     }
   }
   
+  int getNum(){
+    return num;
+  }
+  
 }

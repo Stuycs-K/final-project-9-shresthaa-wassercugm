@@ -340,3 +340,11 @@ void drawArrow() {
     );
   strokeWeight(1);
 }
+
+void winScreen(int player){
+  fill(60,255,0);
+  rect(0, height-scoreBar, width, scoreBar);
+  fill(0);
+  textSize(40);
+  text("Player " + player + " wins!", width/2, height - scoreBar/2);
+}

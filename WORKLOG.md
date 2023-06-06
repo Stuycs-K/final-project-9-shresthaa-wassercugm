@@ -87,3 +87,11 @@ Finished working on the side holes. Started working on the corner holes.
 ### 6/4/23
 
 Finished implementing the holes, and modified the graphics.
+
+### 6/5/23
+
+Reorganized the code in the Game file to transition into creating a standard game of 8 ball pool. Added turns to the game, with a player's turn continuing if they pocketed one of their balls.
+
+### 6/6/23
+
+Added the ability to place the cue ball back on the board if a player pocketed it (and added a cheat to do the same).

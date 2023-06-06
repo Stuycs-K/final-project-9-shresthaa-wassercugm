@@ -44,7 +44,11 @@ Revised holes so it's easier to implement interaction with balls. Also rehearsed
 
 ### 6/1/23
 
-Completed hole revisions and added dots on the edges of the table to make it more realistic.
+Completed hole revisions and added diamonds on the edges of the table to make it more realistic.
+
+### 6/5/23
+
+Continued testing for errors(especially with holes and bouncing), start on making it a game by displaying player's turn(will continue revising bounce and start working on scoring after Maya completes her revisions).
 
 ## Maya
 
@@ -82,4 +86,4 @@ Finished working on the side holes. Started working on the corner holes.
 
 ### 6/4/23
 
-Finished implementing the holes, and modified the graphics. 
+Finished implementing the holes, and modified the graphics.

@@ -97,8 +97,12 @@ void mouseOnBoard(){
   
 }
 
+boolean mouseOnTable() {
+  return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
+}
+
 void mouseClicked(){
-  if (placeCue){
+  if (placeCue && mouseOnTable()){
     cue.reset(mouseX, mouseY);
     placeCue = false;
     canShoot = true;
@@ -119,14 +123,13 @@ void draw() {
   powerBar();
   drawTable();
   int stopped = 0;
-
-  if (canShoot) {
-    // reset cue ball
-    if (!cue.isOnBoard()) {
+  
+  if (canShoot && !cue.isOnBoard()) {
       placeCue = true;   
       canShoot = false;
-    }
+   }
 
+  if (canShoot) {
     // draw aiming arrow
     drawArrow();
 

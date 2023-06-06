@@ -7,6 +7,7 @@ CueBall cue;
 Ball eightBall;
 boolean stripedTurn;
 boolean solidsTurn;
+boolean placeCue;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -61,6 +62,7 @@ void setup() {
   canShoot = false;
   solidsTurn = true;
   stripedTurn = false;
+  placeCue = false;
   solidsSunkInTurn = -1;
   stripedSunkInTurn = -1;
   solidsSunk = new ArrayList<Ball>();
@@ -91,6 +93,17 @@ void mouseDragged() {
   }
 }
 
+void mouseOnBoard(){
+  
+}
+
+void mouseClicked(){
+  if (placeCue){
+    cue.reset(mouseX, mouseY);
+    placeCue = false;
+    canShoot = true;
+  }
+}
 
 void keyPressed() {
   keyboardInput.press(keyCode);
@@ -110,7 +123,8 @@ void draw() {
   if (canShoot) {
     // reset cue ball
     if (!cue.isOnBoard()) {
-      cue.reset();
+      placeCue = true;   
+      canShoot = false;
     }
 
     // draw aiming arrow

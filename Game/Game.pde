@@ -1,6 +1,12 @@
 ArrayList<Ball> balls;
+ArrayList<Ball> stripedSunk;
+ArrayList<Ball> solidsSunk;
+int solidsSunkInTurn;
+int stripedSunkInTurn;
 CueBall cue;
 Ball eightBall;
+boolean stripedTurn;
+boolean solidsTurn;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -9,12 +15,10 @@ int boardHeight;
 int border;
 int sideBar;
 int scoreBar;
-int player;
 
 // for user interaction
 boolean canShoot;
-int template = 0;
-float strength = 500;
+float strength;
 PVector aimDirection; // should be kept normalized
 Controller keyboardInput;
 
@@ -55,8 +59,16 @@ void setup() {
   textAlign(CENTER);
 
   canShoot = false;
-
+  solidsTurn = true;
+  stripedTurn = false;
+  solidsSunkInTurn = -1;
+  stripedSunkInTurn = -1;
+  solidsSunk = new ArrayList<Ball>();
+  stripedSunk = new ArrayList<Ball>();
+  
   aimDirection = new PVector(0, 1).normalize();
+  
+  strength = 500;
 
   keyboardInput = new Controller();
 
@@ -113,6 +125,8 @@ void draw() {
       float power = (400 - (strength-100) )*0.0375 + 5;
       cue.setV( aimDirection.mult(power) );
       canShoot = false;
+      solidsSunkInTurn = 0;
+      stripedSunkInTurn = 0;
     }
   }
 
@@ -136,8 +150,18 @@ void draw() {
       } else {
         ball.applyFriction(ball.getForce());
       }
-
+      
       ball.changeOnBoard();
+      if ( !ball.isOnBoard() && ball != cue){
+        if (ball.isStriped){
+          stripedSunk.add(ball);
+          stripedSunkInTurn++;
+        }else{
+          solidsSunk.add(ball);
+          solidsSunkInTurn++;
+        }
+      }
+      
       ball.move();
       ball.getShape();
     } else {
@@ -147,7 +171,17 @@ void draw() {
 
   if (stopped == balls.size()) {
     canShoot = true;
+    if (solidsTurn && solidsSunkInTurn == 0){
+      solidsTurn = false;
+      stripedTurn = true;
+    }else if (stripedTurn && stripedSunkInTurn == 0){
+      solidsTurn = true;
+      stripedTurn = false;
+    }
+    solidsSunkInTurn = -1;
+    stripedSunkInTurn = -1;
   }
+  
 }
 
 
@@ -282,7 +316,11 @@ void powerBar() {
 void scoreBar(){
   fill(255);
   textSize(28);
-  text("Player "+player, border+boardWidth/2, border*2+boardHeight+57);
+  if (solidsTurn){
+    text("Player 1 (solids)", border+boardWidth/2, border*2+boardHeight+57);
+  }else{
+    text("Player 2 (striped)", border+boardWidth/2, border*2+boardHeight+57);
+  }
 }
 
 void drawArrow() {

@@ -171,6 +171,10 @@ public class Ball { //<>// //<>// //<>//
     return onBoard;
   }
   
+  boolean isStriped(){
+    return isStriped;
+  }
+  
   boolean bounceCheck(){
     float x = pos.x;
     float y = pos.y;

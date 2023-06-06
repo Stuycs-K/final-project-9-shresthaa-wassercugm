@@ -133,6 +133,29 @@ public class Ball { //<>// //<>// //<>//
       }
     }
   }
+  
+  void getShape(int x, int y) {
+    if (onBoard) {
+      // outer circle
+      stroke(0);
+      fill(col);
+      circle(x, y, (float)r*2);
+      //inner circle
+      fill(255);
+      noStroke();
+      circle(x, y, (float)r);
+      // number
+      textSize(12);
+      fill(0);
+      text(numBall, x, y+r/4);
+      if (isStriped){
+        stroke(0);
+        fill(255);
+        arc(x, y, (float)r*2, (float)r*2, PI/4, 3*PI/4, OPEN);
+        arc(x, y, (float)r*2, (float)r*2, 5*PI/4, 7*PI/4, OPEN);
+      }
+    }
+  }
 
   void goal() {
     onBoard = false;

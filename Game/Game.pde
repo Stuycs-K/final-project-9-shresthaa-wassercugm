@@ -7,6 +7,8 @@ CueBall cue;
 Ball eightBall;
 boolean stripedTurn;
 boolean solidsTurn;
+int solidBalls;
+int stripedBalls;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -36,22 +38,22 @@ void setup() {
   balls = new ArrayList<Ball>();
   int x = width-sideBar-border-boardWidth/4;
   int y = (height-100)/2;
-  balls.add(new Ball(x-r/2-7, y+6, true, color(255,240,0), 9));
-  balls.add(new Ball(x+r*sin(PI/6)-r/2-2, y+r/2+sin(PI/3)*r-r/2, false, color(138,6,6), 7));
-  balls.add(new Ball(x+r*sin(PI/6)-r/2+4, y-r/2-sin(PI/3)*r+r/2-2, true, color(133,34,239), 12));
+  balls.add(new Ball(x-r/2-7, y+6, true, color(255, 240, 0), 9));
+  balls.add(new Ball(x+r*sin(PI/6)-r/2-2, y+r/2+sin(PI/3)*r-r/2, false, color(138, 6, 6), 7));
+  balls.add(new Ball(x+r*sin(PI/6)-r/2+4, y-r/2-sin(PI/3)*r+r/2-2, true, color(133, 34, 239), 12));
   eightBall = new Ball(x+2*r*sin(PI/6)+r+1, y+1, false, color(0), 8);
   balls.add(eightBall);
-  balls.add(new Ball(x+2*r*sin(PI/6)+r, y+r/2+sin(PI/3)*2*r+1, true, color(138,6,6), 15));
-  balls.add(new Ball(x+2*r*sin(PI/6)+r, y-r/2-sin(PI/3)*2*r+2, false, color(255,240,0), 1));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y+r/2+sin(PI/3)*r-r/2+6, true, color(0,48,255), 10));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*r+r/2-2, false, color(232,28,28),3));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+4, y+r/2+sin(PI/3)*3*r+5, false, color(17,159,19), 6));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*3*r-1, true, color(17,159,19), 14));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+1, true, color(245,121,14), 13));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*2*r+1, false, color(0,48,255), 2));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*2*r+2, false, color(133,34,239), 4));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*4*r+1, true, color(232,28,28), 11));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*4*r+1, false, color(245,121,14), 5));
+  balls.add(new Ball(x+2*r*sin(PI/6)+r, y+r/2+sin(PI/3)*2*r+1, true, color(138, 6, 6), 15));
+  balls.add(new Ball(x+2*r*sin(PI/6)+r, y-r/2-sin(PI/3)*2*r+2, false, color(255, 240, 0), 1));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y+r/2+sin(PI/3)*r-r/2+6, true, color(0, 48, 255), 10));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*r+r/2-2, false, color(232, 28, 28), 3));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+4, y+r/2+sin(PI/3)*3*r+5, false, color(17, 159, 19), 6));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*3*r-1, true, color(17, 159, 19), 14));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+1, true, color(245, 121, 14), 13));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*2*r+1, false, color(0, 48, 255), 2));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*2*r+2, false, color(133, 34, 239), 4));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*4*r+1, true, color(232, 28, 28), 11));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*4*r+1, false, color(245, 121, 14), 5));
   cue = new CueBall(border+boardWidth/4, y);
   balls.add(cue);
 
@@ -65,9 +67,9 @@ void setup() {
   stripedSunkInTurn = -1;
   solidsSunk = new ArrayList<Ball>();
   stripedSunk = new ArrayList<Ball>();
-  
+
   aimDirection = new PVector(0, 1).normalize();
-  
+
   strength = 500;
 
   keyboardInput = new Controller();
@@ -150,18 +152,18 @@ void draw() {
       } else {
         ball.applyFriction(ball.getForce());
       }
-      
+
       ball.changeOnBoard();
-      if ( !ball.isOnBoard() && ball != cue){
-        if (ball.isStriped){
+      if ( !ball.isOnBoard() && ball != cue) {
+        if (ball.isStriped) {
           stripedSunk.add(ball);
           stripedSunkInTurn++;
-        }else{
+        } else {
           solidsSunk.add(ball);
           solidsSunkInTurn++;
         }
       }
-      
+
       ball.move();
       ball.getShape();
     } else {
@@ -171,17 +173,16 @@ void draw() {
 
   if (stopped == balls.size()) {
     canShoot = true;
-    if (solidsTurn && solidsSunkInTurn == 0){
+    if (solidsTurn && solidsSunkInTurn == 0) {
       solidsTurn = false;
       stripedTurn = true;
-    }else if (stripedTurn && stripedSunkInTurn == 0){
+    } else if (stripedTurn && stripedSunkInTurn == 0) {
       solidsTurn = true;
       stripedTurn = false;
     }
     solidsSunkInTurn = -1;
     stripedSunkInTurn = -1;
   }
-  
 }
 
 
@@ -313,15 +314,22 @@ void powerBar() {
   }
 }
 
-void scoreBar(){
-  fill(255);
+void scoreBar() {
   textSize(28);
-  if (solidsTurn){
-    text("Player 1 (solids)", border+boardWidth/2, border*2+boardHeight+57);
-  }else{
+  //player #
+  if (solidsTurn) {
+    fill(255, 0, 0);
+    text("Player 1 (solids)", border+boardWidth/2-100, border*2+boardHeight+57);
+    //text("Balls left: ", border+boardWidth/2+100, border*2+boardHeight+57);
+  } else {
+    fill(0, 0, 255);
     text("Player 2 (striped)", border+boardWidth/2, border*2+boardHeight+57);
   }
+  //create font!!!
+  //getShape(x,y);
+  fill(255);
 }
+
 
 void drawArrow() {
   strokeWeight(4);
@@ -341,8 +349,8 @@ void drawArrow() {
   strokeWeight(1);
 }
 
-void winScreen(int player){
-  fill(60,255,0);
+void winScreen(int player) {
+  fill(60, 255, 0);
   rect(0, height-scoreBar, width, scoreBar);
   fill(0);
   textSize(40);

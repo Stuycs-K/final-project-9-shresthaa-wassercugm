@@ -93,10 +93,6 @@ void mouseDragged() {
   }
 }
 
-void mouseOnBoard(){
-  
-}
-
 boolean mouseOnTable() {
   return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
 }
@@ -124,9 +120,10 @@ void draw() {
   drawTable();
   int stopped = 0;
   
-  if (canShoot && !cue.isOnBoard()) {
+  if (canShoot && (!cue.isOnBoard() || keyboardInput.isPressed(Controller.zero)) ) {
       placeCue = true;   
       canShoot = false;
+      cueBallText();
    }
 
   if (canShoot) {
@@ -364,4 +361,19 @@ void winScreen(int player){
   fill(0);
   textSize(40);
   text("Player " + player + " wins!", width/2, height - scoreBar/2);
+}
+
+int getPlayer(){
+  if (solidsTurn){
+    return 1;
+  }else{
+    return 2;
+  }
+}
+
+void cueBallText(){
+  fill(0);
+  rect(0, height-100, width, 100);
+  fill(255);
+  text("Player " + getPlayer() + ": click to place cue ball", border+boardWidth/2, border*2+boardHeight+57);
 }

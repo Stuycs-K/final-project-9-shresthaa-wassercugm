@@ -50,6 +50,10 @@ Completed hole revisions and added diamonds on the edges of the table to make it
 
 Continued testing for errors(especially with holes and bouncing), start on making it a game by displaying player's turn(will continue revising bounce and start working on scoring after Maya completes her revisions).
 
+### 6/6/23
+
+Complete score tracker(display all remaining balls), and fix display and color of text.
+
 ## Maya
 
 ### 5/22/23

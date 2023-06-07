@@ -391,6 +391,11 @@ int getPlayer(){
 void cueBallText(){
   fill(0);
   rect(0, height-100, width, 100);
-  fill(255);
+  if (solidsTurn) {
+    fill(255, 0, 0);
+  } else {
+    fill(0, 0, 255);
+  }
   text("Player " + getPlayer() + ": click to place cue ball", border+boardWidth/2, border*2+boardHeight+57);
+  fill(255);
 }

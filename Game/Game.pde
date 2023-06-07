@@ -56,7 +56,10 @@ void setup() {
   balls.add(new Ball(x+2*r*sin(PI/6)+r, y+r/2+sin(PI/3)*2*r+1, true, color(138, 6, 6), 15));
   cue = new CueBall(border+boardWidth/4, y);
   balls.add(cue);
-
+  
+  
+  
+  
   //other
   textAlign(CENTER);
 
@@ -315,7 +318,7 @@ void drawTable() {
 
 void powerBar() {
   fill(255);
-  textSize(25);
+  PFont text = createFont("Norasi-Bold-25.vlw",60);
   text("power", 1150, 50);
 
   noStroke();

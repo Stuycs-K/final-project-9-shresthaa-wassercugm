@@ -9,6 +9,7 @@ boolean stripedTurn;
 boolean solidsTurn;
 int solidBalls;
 int stripedBalls;
+boolean placeCue;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -24,7 +25,6 @@ float strength;
 PVector aimDirection; // should be kept normalized
 Controller keyboardInput;
 
-// --------------------------------------------
 
 void setup() {
   size(1200, 700);
@@ -63,6 +63,7 @@ void setup() {
   canShoot = false;
   solidsTurn = true;
   stripedTurn = false;
+  placeCue = false;
   solidsSunkInTurn = -1;
   stripedSunkInTurn = -1;
   solidsSunk = new ArrayList<Ball>();
@@ -93,6 +94,17 @@ void mouseDragged() {
   }
 }
 
+boolean mouseOnTable() {
+  return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
+}
+
+void mouseClicked(){
+  if (placeCue && mouseOnTable()){
+    cue.reset(mouseX, mouseY);
+    placeCue = false;
+    canShoot = true;
+  }
+}
 
 void keyPressed() {
   keyboardInput.press(keyCode);
@@ -108,13 +120,14 @@ void draw() {
   powerBar();
   drawTable();
   int stopped = 0;
+  
+  if (canShoot && (!cue.isOnBoard() || keyboardInput.isPressed(Controller.zero)) ) {
+      placeCue = true;   
+      canShoot = false;
+      cueBallText();
+   }
 
   if (canShoot) {
-    // reset cue ball
-    if (!cue.isOnBoard()) {
-      cue.reset();
-    }
-
     // draw aiming arrow
     drawArrow();
 
@@ -365,4 +378,19 @@ void winScreen(int player) {
   fill(0);
   textSize(40);
   text("Player " + player + " wins!", width/2, height - scoreBar/2);
+}
+
+int getPlayer(){
+  if (solidsTurn){
+    return 1;
+  }else{
+    return 2;
+  }
+}
+
+void cueBallText(){
+  fill(0);
+  rect(0, height-100, width, 100);
+  fill(255);
+  text("Player " + getPlayer() + ": click to place cue ball", border+boardWidth/2, border*2+boardHeight+57);
 }

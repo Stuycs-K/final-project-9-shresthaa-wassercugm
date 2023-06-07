@@ -9,7 +9,6 @@ boolean stripedTurn;
 boolean solidsTurn;
 int solidBalls;
 int stripedBalls;
-boolean placeCue;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -25,6 +24,7 @@ float strength;
 PVector aimDirection; // should be kept normalized
 Controller keyboardInput;
 
+// --------------------------------------------
 
 void setup() {
   size(1200, 700);
@@ -63,7 +63,6 @@ void setup() {
   canShoot = false;
   solidsTurn = true;
   stripedTurn = false;
-  placeCue = false;
   solidsSunkInTurn = -1;
   stripedSunkInTurn = -1;
   solidsSunk = new ArrayList<Ball>();
@@ -94,17 +93,6 @@ void mouseDragged() {
   }
 }
 
-boolean mouseOnTable() {
-  return mouseX > border && mouseX < boardWidth + border && mouseY > border && mouseY < boardHeight + border;
-}
-
-void mouseClicked(){
-  if (placeCue && mouseOnTable()){
-    cue.reset(mouseX, mouseY);
-    placeCue = false;
-    canShoot = true;
-  }
-}
 
 void keyPressed() {
   keyboardInput.press(keyCode);
@@ -120,14 +108,13 @@ void draw() {
   powerBar();
   drawTable();
   int stopped = 0;
-  
-  if (canShoot && (!cue.isOnBoard() || keyboardInput.isPressed(Controller.zero)) ) {
-      placeCue = true;   
-      canShoot = false;
-      cueBallText();
-   }
 
   if (canShoot) {
+    // reset cue ball
+    if (!cue.isOnBoard()) {
+      cue.reset();
+    }
+
     // draw aiming arrow
     drawArrow();
 
@@ -332,20 +319,21 @@ void scoreBar() {
   //player #
   if (solidsTurn) {
     fill(255, 0, 0);
-    text("Player 1 (solids)", border+boardWidth/2-50, border*2+boardHeight+31);
+    text("Player 1 (solids)", border+boardWidth/2-10, border*2+boardHeight+31);
+    //text("Balls left: ", border+boardWidth/2+100, border*2+boardHeight+57);
   } else {
     fill(0, 0, 255);
-    text("Player 2 (striped)", border+boardWidth/2-55, border*2+boardHeight+81);
+    text("Player 2 (striped)", border+boardWidth/2-10, border*2+boardHeight+81);
   }
-  int solids = 50;
-  int stripes = 50;
+  int solids = 100;
+  int stripes = 100;
   for (int i = 0; i < balls.size(); i++) {
     if(balls.get(i).getNum() != -1 && balls.get(i).getNum() != 8){
       if(!balls.get(i).isStriped()){
-        balls.get(i).getShape(border+boardWidth/2+solids, border*2+boardHeight+25);
+        balls.get(i).getShape(border+boardWidth/2+solids,border*2+boardHeight+25);
         solids+=50;
       }else{
-        balls.get(i).getShape(border+boardWidth/2+stripes, border*2+boardHeight+75);
+        balls.get(i).getShape(border+boardWidth/2+stripes,border*2+boardHeight+75);
         stripes+=50;
       }
     }
@@ -378,24 +366,4 @@ void winScreen(int player) {
   fill(0);
   textSize(40);
   text("Player " + player + " wins!", width/2, height - scoreBar/2);
-}
-
-int getPlayer(){
-  if (solidsTurn){
-    return 1;
-  }else{
-    return 2;
-  }
-}
-
-void cueBallText(){
-  fill(0);
-  rect(0, height-100, width, 100);
-  if (solidsTurn) {
-    fill(255, 0, 0);
-  } else {
-    fill(0, 0, 255);
-  }
-  text("Player " + getPlayer() + ": click to place cue ball", border+boardWidth/2, border*2+boardHeight+57);
-  fill(255);
 }

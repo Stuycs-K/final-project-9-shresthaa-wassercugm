@@ -319,20 +319,21 @@ void scoreBar() {
   //player #
   if (solidsTurn) {
     fill(255, 0, 0);
-    text("Player 1 (solids)", border+boardWidth/2-50, border*2+boardHeight+31);
+    text("Player 1 (solids)", border+boardWidth/2-10, border*2+boardHeight+31);
+    //text("Balls left: ", border+boardWidth/2+100, border*2+boardHeight+57);
   } else {
     fill(0, 0, 255);
-    text("Player 2 (striped)", border+boardWidth/2-50, border*2+boardHeight+81);
+    text("Player 2 (striped)", border+boardWidth/2-10, border*2+boardHeight+81);
   }
-  int solids = 50;
-  int stripes = 50;
+  int solids = 100;
+  int stripes = 100;
   for (int i = 0; i < balls.size(); i++) {
     if(balls.get(i).getNum() != -1 && balls.get(i).getNum() != 8){
       if(!balls.get(i).isStriped()){
-        balls.get(i).getShape(border+boardWidth/2+solids, border*2+boardHeight+25);
+        balls.get(i).getShape(border+boardWidth/2+solids,border*2+boardHeight+25);
         solids+=50;
       }else{
-        balls.get(i).getShape(border+boardWidth/2+stripes, border*2+boardHeight+75);
+        balls.get(i).getShape(border+boardWidth/2+stripes,border*2+boardHeight+75);
         stripes+=50;
       }
     }

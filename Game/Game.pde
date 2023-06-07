@@ -335,7 +335,7 @@ void scoreBar() {
     text("Player 1 (solids)", border+boardWidth/2-50, border*2+boardHeight+31);
   } else {
     fill(0, 0, 255);
-    text("Player 2 (striped)", border+boardWidth/2-50, border*2+boardHeight+81);
+    text("Player 2 (striped)", border+boardWidth/2-55, border*2+boardHeight+81);
   }
   int solids = 50;
   int stripes = 50;

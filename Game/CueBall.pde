@@ -12,8 +12,8 @@ public class CueBall extends Ball {
     }
   }
   
-  void reset(){
-    setP(boardWidth/2 + border, boardHeight/2 + border);
+  void reset(float x, float y){
+    setP(x, y);
     setV(0,0);
     setOnBoard(true);
   }

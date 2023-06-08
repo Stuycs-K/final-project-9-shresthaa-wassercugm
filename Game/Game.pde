@@ -7,9 +7,9 @@ CueBall cue;
 Ball eightBall;
 boolean stripedTurn;
 boolean solidsTurn;
-int solidBalls;
-int stripedBalls;
 boolean placeCue;
+boolean isWon;
+int wonBy;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -68,6 +68,7 @@ void setup() {
   solidsTurn = true;
   stripedTurn = false;
   placeCue = false;
+  isWon = false;
   solidsSunkInTurn = -1;
   stripedSunkInTurn = -1;
   solidsSunk = new ArrayList<Ball>();
@@ -123,83 +124,109 @@ void draw() {
   scoreBar();
   powerBar();
   drawTable();
-  int stopped = 0;
   
-  if (canShoot && (!cue.isOnBoard() || keyboardInput.isPressed(Controller.zero)) ) {
-      placeCue = true;   
-      canShoot = false;
-      cueBallText();
-   }
-
-  if (canShoot) {
-    // draw aiming arrow
-    drawArrow();
-
-    // draw marker on power bar
-    fill(157, 5, 240);
-    rect(1120, strength, 60, 8, 4);
-
-    // fire when enter is pressed
-    if (keyboardInput.isPressed(Controller.enter)) {
-      float power = (400 - (strength-100) )*0.0375 + 5;
-      cue.setV( aimDirection.mult(power) );
-      canShoot = false;
-      solidsSunkInTurn = 0;
-      stripedSunkInTurn = 0;
+  if (!isWon){
+    int stopped = 0;
+    if (canShoot && (!cue.isOnBoard() || keyboardInput.isPressed(Controller.zero)) ) {
+        placeCue = true;   
+        canShoot = false;
+        cueBallText();
+     }
+  
+    if (canShoot) {
+      // draw aiming arrow
+      drawArrow();
+  
+      // draw marker on power bar
+      fill(157, 5, 240);
+      rect(1120, strength, 60, 8, 4);
+  
+      // fire when enter is pressed
+      if (keyboardInput.isPressed(Controller.enter)) {
+        float power = (400 - (strength-100) )*0.0375 + 5;
+        cue.setV( aimDirection.mult(power) );
+        canShoot = false;
+        solidsSunkInTurn = 0;
+        stripedSunkInTurn = 0;
+      }
     }
-  }
-
-
-  for (int i = 0; i < balls.size(); i++) {
-    Ball ball = balls.get(i);
-
-    if (ball.isOnBoard()) {
-      // apply collisions
-      for (int j = i+1; j < balls.size(); j++) {
-        Ball other = balls.get(j);
-        if (ball.isOverlapping(other)) {
-          ball.collide(other);
+  
+  
+    for (int i = 0; i < balls.size(); i++) {
+      Ball ball = balls.get(i);
+  
+      if (ball.isOnBoard()) {
+        // apply collisions
+        for (int j = i+1; j < balls.size(); j++) {
+          Ball other = balls.get(j);
+          if (ball.isOverlapping(other)) {
+            ball.collide(other);
+          }
         }
-      }
-
-      // If the ball is moving, apply friction
-      if ( ball.getV().mag() < 0.05 ) {
-        ball.setV(0, 0);
-        stopped++;
-      } else {
-        ball.applyFriction(ball.getForce());
-      }
-
-      ball.changeOnBoard();
-      if ( !ball.isOnBoard() && ball != cue) {
-        if (ball.isStriped) {
-          stripedSunk.add(ball);
-          stripedSunkInTurn++;
+  
+        // If the ball is moving, apply friction
+        if ( ball.getV().mag() < 0.05 ) {
+          ball.setV(0, 0);
+          stopped++;
         } else {
-          solidsSunk.add(ball);
-          solidsSunkInTurn++;
+          ball.applyFriction(ball.getForce());
+        }
+  
+        ball.changeOnBoard();
+        if ( !ball.isOnBoard() && ball != cue && ball != eightBall) {
+          if (ball.isStriped) {
+            stripedSunk.add(ball);
+            stripedSunkInTurn++;
+          } else {
+            solidsSunk.add(ball);
+            solidsSunkInTurn++;
+          }
+        }
+  
+        ball.move();
+        ball.getShape();
+      } else {
+        stopped++;
+      }
+    }
+    
+    if (!eightBall.isOnBoard()){
+      isWon = true;
+      if (solidsTurn){
+        if (solidsSunk.size() == 7){
+          wonBy = 1;
+        }else{
+          wonBy = 2;
+        }
+      }else{
+        if (stripedSunk.size() == 7){
+          wonBy = 2;
+        }else{
+          wonBy = 1;
         }
       }
-
-      ball.move();
+    }
+  
+    if (stopped == balls.size()) {
+      canShoot = true;
+      if (solidsTurn && solidsSunkInTurn == 0) {
+        solidsTurn = false;
+        stripedTurn = true;
+      } else if (stripedTurn && stripedSunkInTurn == 0) {
+        solidsTurn = true;
+        stripedTurn = false;
+      }
+      solidsSunkInTurn = -1;
+      stripedSunkInTurn = -1;
+    }
+    
+  }else{
+    for (Ball ball : balls){
       ball.getShape();
-    } else {
-      stopped++;
     }
+    winScreen(wonBy);
   }
-
-  if (stopped == balls.size()) {
-    canShoot = true;
-    if (solidsTurn && solidsSunkInTurn == 0) {
-      solidsTurn = false;
-      stripedTurn = true;
-    } else if (stripedTurn && stripedSunkInTurn == 0) {
-      solidsTurn = true;
-      stripedTurn = false;
-    }
-    solidsSunkInTurn = -1;
-    stripedSunkInTurn = -1;
-  }
+  
 }
 
 
@@ -363,13 +390,13 @@ void drawArrow() {
   stroke(0);
   float x1 = cue.getP().x;
   float y1 = cue.getP().y;
-  float x2 = x1 + aimDirection.x*100;
-  float y2 = y1 + aimDirection.y*100;
+  float x2 = x1 + aimDirection.x*150;
+  float y2 = y1 + aimDirection.y*150;
   line(x1, y1, x2, y2);
   PVector normal = aimDirection.copy();
   normal.rotate(PI/2);
   fill(0);
-  triangle( x1 + aimDirection.x*110, y1 + aimDirection.y*110,
+  triangle( x1 + aimDirection.x*160, y1 + aimDirection.y*160,
     x2 + normal.x*5, y2 + normal.y * 5,
     x2 - normal.x*5, y2 - normal.y * 5
     );

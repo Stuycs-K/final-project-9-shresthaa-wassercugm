@@ -169,7 +169,7 @@ void draw() {
         }
   
         ball.changeOnBoard();
-        if ( !ball.isOnBoard() && ball != cue) {
+        if ( !ball.isOnBoard() && ball != cue && ball != eightBall) {
           if (ball.isStriped) {
             stripedSunk.add(ball);
             stripedSunkInTurn++;
@@ -183,6 +183,23 @@ void draw() {
         ball.getShape();
       } else {
         stopped++;
+      }
+    }
+    
+    if (!eightBall.isOnBoard()){
+      isWon = true;
+      if (solidsTurn){
+        if (solidsSunk.size() == 7){
+          wonBy = 1;
+        }else{
+          wonBy = 2;
+        }
+      }else{
+        if (stripedSunk.size() == 7){
+          wonBy = 2;
+        }else{
+          wonBy = 1;
+        }
       }
     }
   

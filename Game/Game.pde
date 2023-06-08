@@ -244,8 +244,8 @@ void draw() {
       ball.getShape();
     }
     winScreen(wonBy);
-    if (keyboardInput.isPressed(4)) {
-      keyboardInput.release(4);
+    if (keyboardInput.isPressed(3)) {
+      keyboardInput.release(3);
       wonBy = -1;
       isWon = false;
       template = 0;

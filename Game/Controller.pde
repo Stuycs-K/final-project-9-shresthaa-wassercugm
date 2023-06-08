@@ -1,6 +1,6 @@
 class Controller {
   static final int enter = 0;
-  static final int zero = 3;
+  static final int zero = 4;
   boolean[] inputs;
 
   public Controller() {
@@ -18,9 +18,9 @@ class Controller {
       inputs[1] = true;
     } else if (code == '2') {
       inputs[2] = true;
-    } else if (code == '0'){
+    } else if (code == '3'){
       inputs[3] = true;
-    }else if (code == '4'){
+    }else if (code == '0'){
       inputs[4] = true;
     }
   }
@@ -32,9 +32,9 @@ class Controller {
       inputs[1] = false;
     } else if (code == '2') {
       inputs[2] = false;
-    } else if (code == '0'){
+    } else if (code == '3'){
       inputs[3] = false;
-    }else if (code == '4'){
+    }else if (code == '0'){
       inputs[4] = false;
     }
   }

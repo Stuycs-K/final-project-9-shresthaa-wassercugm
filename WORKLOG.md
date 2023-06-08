@@ -99,3 +99,7 @@ Reorganized the code in the Game file to transition into creating a standard gam
 ### 6/6/23
 
 Added the ability to place the cue ball back on the board if a player pocketed it (and added a cheat to do the same).
+
+### 6/7/23
+
+Added the ability to win/lose the game when the 8 ball is pocketed. 

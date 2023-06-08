@@ -200,7 +200,6 @@ void draw() {
     solidsSunkInTurn = -1;
     stripedSunkInTurn = -1;
   }
-  winScreen(1);
 }
 
 

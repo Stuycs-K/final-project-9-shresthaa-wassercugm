@@ -11,6 +11,7 @@ boolean solidsTurn;
 boolean placeCue;
 boolean isWon;
 int wonBy;
+int count = 0;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -90,37 +91,18 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  keyboardInput.press(keyCode);
+  if (keyCode == '3' && count == 0) {
+    keyboardInput.press(keyCode);
+    count = 1;
+  } else {
+    keyboardInput.press(keyCode);
+    count = 0;
+  }
 }
 
 void keyReleased() {
   keyboardInput.release(keyCode);
 }
-
-void drawBalls() {
-  balls = new ArrayList<Ball>();
-  int x = width-sideBar-border-boardWidth/4;
-  int y = (height-100)/2;
-  balls.add(new Ball(x+2*r*sin(PI/6)+r, y-r/2-sin(PI/3)*2*r+2, false, color(255, 240, 0), 1));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*2*r+1, false, color(0, 48, 255), 2));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*r+r/2-2, false, color(232, 28, 28), 3));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*2*r+2, false, color(133, 34, 239), 4));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*4*r+1, false, color(245, 121, 14), 5));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+4, y+r/2+sin(PI/3)*3*r+5, false, color(17, 159, 19), 6));
-  balls.add(new Ball(x+r*sin(PI/6)-r/2-2, y+r/2+sin(PI/3)*r-r/2, false, color(138, 6, 6), 7));
-  eightBall = new Ball(x+2*r*sin(PI/6)+r+1, y+1, false, color(0), 8);
-  balls.add(eightBall);
-  balls.add(new Ball(x-r/2-7, y+6, true, color(255, 240, 0), 9));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y+r/2+sin(PI/3)*r-r/2+6, true, color(0, 48, 255), 10));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*4*r+1, true, color(232, 28, 28), 11));
-  balls.add(new Ball(x+r*sin(PI/6)-r/2+4, y-r/2-sin(PI/3)*r+r/2-2, true, color(133, 34, 239), 12));
-  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+1, true, color(245, 121, 14), 13));
-  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*3*r-1, true, color(17, 159, 19), 14));
-  balls.add(new Ball(x+2*r*sin(PI/6)+r, y+r/2+sin(PI/3)*2*r+1, true, color(138, 6, 6), 15));
-  cue = new CueBall(border+boardWidth/4, y);
-  balls.add(cue);
-}
-
 
 void draw() {
   background(0);
@@ -226,7 +208,7 @@ void draw() {
             wonBy = 1;
           }
         }
-      }else{
+      } else {
         if (solidsTurn) {
           wonBy = 1;
         } else {
@@ -264,6 +246,30 @@ void draw() {
 
 
 // ---------- Graphics ----------
+void drawBalls() {
+  balls = new ArrayList<Ball>();
+  int x = width-sideBar-border-boardWidth/4;
+  int y = (height-100)/2;
+  balls.add(new Ball(x+2*r*sin(PI/6)+r, y-r/2-sin(PI/3)*2*r+2, false, color(255, 240, 0), 1));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*2*r+1, false, color(0, 48, 255), 2));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*r+r/2-2, false, color(232, 28, 28), 3));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*2*r+2, false, color(133, 34, 239), 4));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y-r/2-sin(PI/3)*4*r+1, false, color(245, 121, 14), 5));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+4, y+r/2+sin(PI/3)*3*r+5, false, color(17, 159, 19), 6));
+  balls.add(new Ball(x+r*sin(PI/6)-r/2-2, y+r/2+sin(PI/3)*r-r/2, false, color(138, 6, 6), 7));
+  eightBall = new Ball(x+2*r*sin(PI/6)+r+1, y+1, false, color(0), 8);
+  balls.add(eightBall);
+  balls.add(new Ball(x-r/2-7, y+6, true, color(255, 240, 0), 9));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y+r/2+sin(PI/3)*r-r/2+6, true, color(0, 48, 255), 10));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+r/2+sin(PI/3)*4*r+1, true, color(232, 28, 28), 11));
+  balls.add(new Ball(x+r*sin(PI/6)-r/2+4, y-r/2-sin(PI/3)*r+r/2-2, true, color(133, 34, 239), 12));
+  balls.add(new Ball(x+4*r*sin(PI/6)+3*r+9, y+1, true, color(245, 121, 14), 13));
+  balls.add(new Ball(x+3*r*sin(PI/6)+2*r+5, y-r/2-sin(PI/3)*3*r-1, true, color(17, 159, 19), 14));
+  balls.add(new Ball(x+2*r*sin(PI/6)+r, y+r/2+sin(PI/3)*2*r+1, true, color(138, 6, 6), 15));
+  cue = new CueBall(border+boardWidth/4, y);
+  balls.add(cue);
+}
+
 void drawTable() {
   stroke(0);
 

@@ -136,7 +136,7 @@ void draw() {
     }
     if (keyboardInput.isPressed(1)&&template==0) {
       keyboardInput.release(2);
-      template = 0;
+      template = 1;
       balls = new ArrayList<Ball>();
       cue = new CueBall(border+boardWidth*3/4+100, border+boardHeight*3/4);
       balls.add(cue);
@@ -212,17 +212,25 @@ void draw() {
 
     if (!eightBall.isOnBoard()) {
       isWon = true;
-      if (solidsTurn) {
-        if (solidsSunk.size() == 7) {
-          wonBy = 1;
+      if (template==0) {
+        if (solidsTurn) {
+          if (solidsSunk.size() == 7) {
+            wonBy = 1;
+          } else {
+            wonBy = 2;
+          }
         } else {
-          wonBy = 2;
+          if (stripedSunk.size() == 7) {
+            wonBy = 2;
+          } else {
+            wonBy = 1;
+          }
         }
-      } else {
-        if (stripedSunk.size() == 7) {
-          wonBy = 2;
-        } else {
+      }else{
+        if (solidsTurn) {
           wonBy = 1;
+        } else {
+          wonBy = 2;
         }
       }
     }

@@ -386,13 +386,13 @@ void drawArrow() {
   stroke(0);
   float x1 = cue.getP().x;
   float y1 = cue.getP().y;
-  float x2 = x1 + aimDirection.x*100;
-  float y2 = y1 + aimDirection.y*100;
+  float x2 = x1 + aimDirection.x*150;
+  float y2 = y1 + aimDirection.y*150;
   line(x1, y1, x2, y2);
   PVector normal = aimDirection.copy();
   normal.rotate(PI/2);
   fill(0);
-  triangle( x1 + aimDirection.x*110, y1 + aimDirection.y*110,
+  triangle( x1 + aimDirection.x*160, y1 + aimDirection.y*160,
     x2 + normal.x*5, y2 + normal.y * 5,
     x2 - normal.x*5, y2 - normal.y * 5
     );

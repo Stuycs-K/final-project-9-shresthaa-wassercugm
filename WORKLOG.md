@@ -60,7 +60,7 @@ Start revising display and revise minor issues(font, text size, text placement, 
 
 ### 6/8/23
 
-Complete display, and add more cheats using controller. Pressing 1 will lead to easy endgame, 2 will go back to normal game, 3 will restart game after someone wins.
+Complete display, and add more cheats using controller. Pressing 1 will lead to easy endgame, 2 will go back to normal game, 3 will restart game after someone wins. Also revised Read Me to note these changes.
 
 ## Maya
 

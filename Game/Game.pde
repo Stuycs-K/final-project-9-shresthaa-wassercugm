@@ -34,6 +34,7 @@ void setup() {
   border = 50;
   sideBar = 100;
   scoreBar = 100;
+  textFont(loadFont("Norasi-Bold-25.vlw"),30);
 
   balls = new ArrayList<Ball>();
   int x = width-sideBar-border-boardWidth/4;
@@ -318,8 +319,8 @@ void drawTable() {
 
 void powerBar() {
   fill(255);
-  PFont text = createFont("Norasi-Bold-25.vlw",60);
-  text("power", 1150, 50);
+  textSize(30);
+  text("power", 1150, 70);
 
   noStroke();
   color c1 = color(255, 0, 0);
@@ -331,14 +332,14 @@ void powerBar() {
 }
 
 void scoreBar() {
-  textSize(40);
+  textSize(50);
   //player #
   if (solidsTurn) {
     fill(255, 0, 0);
-    text("Player 1 (solids)", border+boardWidth/2-300, border*2+boardHeight+60);
+    text("Player 1 (solids)", border+boardWidth/2-300, border*2+boardHeight+62.5);
   } else {
     fill(0, 0, 255);
-    text("Player 2 (striped)", border+boardWidth/2-310, border*2+boardHeight+60);
+    text("Player 2 (striped)", border+boardWidth/2-310, border*2+boardHeight+62.5);
   }
   int solids = 50;
   int stripes = 50;
@@ -380,7 +381,7 @@ void winScreen(int player) {
   rect(0, height-scoreBar, width, scoreBar);
   fill(0);
   textSize(40);
-  text("Player " + player + " wins!", width/2, height - scoreBar/2);
+  text("Player " + player + " wins!", width/2, height - scoreBar/2+15);
 }
 
 int getPlayer(){
@@ -399,6 +400,7 @@ void cueBallText(){
   } else {
     fill(0, 0, 255);
   }
+  textSize(40);
   text("Player " + getPlayer() + ": click to place cue ball", border+boardWidth/2, border*2+boardHeight+57);
   fill(255);
 }

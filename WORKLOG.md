@@ -54,6 +54,14 @@ Continued testing for errors(especially with holes and bouncing), start on makin
 
 Complete score tracker(display all remaining balls), and fix display and color of text.
 
+### 6/7/23
+
+Start revising display and revise minor issues(font, text size, text placement, etc).
+
+### 6/8/23
+
+Complete display, and add more cheats using controller. Pressing 1 will lead to easy endgame, 2 will go back to normal game, 3 will restart game after someone wins.
+
 ## Maya
 
 ### 5/22/23
@@ -102,4 +110,4 @@ Added the ability to place the cue ball back on the board if a player pocketed i
 
 ### 6/7/23
 
-Added the ability to win/lose the game when the 8 ball is pocketed. 
+Added the ability to win/lose the game when the 8 ball is pocketed.

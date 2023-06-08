@@ -4,7 +4,7 @@ class Controller {
   boolean[] inputs;
 
   public Controller() {
-    inputs = new boolean[4];
+    inputs = new boolean[5];
   }
 
   boolean isPressed(int code) {
@@ -20,6 +20,8 @@ class Controller {
       inputs[2] = true;
     } else if (code == '0'){
       inputs[3] = true;
+    }else if (code == '4'){
+      inputs[4] = true;
     }
   }
 
@@ -32,6 +34,8 @@ class Controller {
       inputs[2] = false;
     } else if (code == '0'){
       inputs[3] = false;
+    }else if (code == '4'){
+      inputs[4] = false;
     }
   }
 }

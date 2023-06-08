@@ -34,7 +34,7 @@ void setup() {
   border = 50;
   sideBar = 100;
   scoreBar = 100;
-  textFont(loadFont("Norasi-Bold-25.vlw"),30);
+  textFont(loadFont("Georgia-20.vlw"),30);
 
   balls = new ArrayList<Ball>();
   int x = width-sideBar-border-boardWidth/4;
@@ -200,6 +200,7 @@ void draw() {
     solidsSunkInTurn = -1;
     stripedSunkInTurn = -1;
   }
+  winScreen(1);
 }
 
 
@@ -380,7 +381,7 @@ void winScreen(int player) {
   fill(60, 255, 0);
   rect(0, height-scoreBar, width, scoreBar);
   fill(0);
-  textSize(40);
+  textSize(50);
   text("Player " + player + " wins!", width/2, height - scoreBar/2+15);
 }
 

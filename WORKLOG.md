@@ -48,19 +48,23 @@ Completed hole revisions and added diamonds on the edges of the table to make it
 
 ### 6/5/23
 
-Continued testing for errors(especially with holes and bouncing), start on making it a game by displaying player's turn(will continue revising bounce and start working on scoring after Maya completes her revisions).
+Continued testing for errors(especially with holes and bouncing), started on making it a game by displaying player's turn(will continue revising bounce and started working on scoring after Maya completes her revisions).
 
 ### 6/6/23
 
-Complete score tracker(display all remaining balls), and fix display and color of text.
+Completed score tracker(display all remaining balls), and fixed display and color of text.
 
 ### 6/7/23
 
-Start revising display and revise minor issues(font, text size, text placement, etc).
+Started revising display and revised minor issues(font, text size, text placement, etc).
 
 ### 6/8/23
 
-Complete display, and add more cheats using controller. Pressing 1 will lead to easy endgame, 2 will go back to normal game, 3 will restart game after someone wins. Also revised Read Me to note these changes.
+Completed display, and added more cheats using controller. Pressing 1 will lead to easy endgame, 2 will go back to normal game, 3 will restart game after someone wins. Also revised Read Me to note these changes.
+
+### 6/9/23
+
+Completed the last cheat, which will bring player to a losing game if 3 is pressed(shooting in the 8-ball before all other balls of their color has been scored). Pressing 4 twice will restart the game(not 3 anymore). Revised Read Me to match these changes.
 
 ## Maya
 

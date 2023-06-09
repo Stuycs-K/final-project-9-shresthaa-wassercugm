@@ -91,8 +91,7 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (keyCode == '3' && count == 0) {
-    keyboardInput.press(keyCode);
+  if (keyCode == '4' && count == 0) {
     count = 1;
   } else {
     keyboardInput.press(keyCode);
@@ -111,17 +110,33 @@ void draw() {
   drawTable();
 
   if (!isWon) {
-    if (keyboardInput.isPressed(2)&&template==1) {
+    if (keyboardInput.isPressed(1)&&template!=0) {
       keyboardInput.release(1);
       template = 0;
       drawBalls();
     }
-    if (keyboardInput.isPressed(1)&&template==0) {
+
+    if (keyboardInput.isPressed(2)&&template!=1) {
       keyboardInput.release(2);
       template = 1;
       balls = new ArrayList<Ball>();
       cue = new CueBall(border+boardWidth*3/4+100, border+boardHeight*3/4);
       balls.add(cue);
+
+      eightBall = new Ball(border+boardWidth-20, border+boardHeight-20, false, color(0), 8);
+      balls.add(eightBall);
+    }
+
+    if (keyboardInput.isPressed(3)&&template!=2) {
+      keyboardInput.release(3);
+      template = 2;
+      balls = new ArrayList<Ball>();
+      cue = new CueBall(border+boardWidth*3/4+150, border+boardHeight*3/4+50);
+      balls.add(cue);
+      
+      balls.add(new Ball(width-sideBar-border-boardWidth/4+2*r*sin(PI/6)+r-100, height/2-50-r/2-sin(PI/3)*2*r-20, false, color(255, 240, 0), 1));
+      balls.add(new Ball(width-sideBar-border-boardWidth/4+4*r*sin(PI/6)+3*r+9, height/2-50-r/2+r/2+sin(PI/3)*4*r+1, true, color(232, 28, 28), 11));
+
 
       eightBall = new Ball(border+boardWidth-20, border+boardHeight-20, false, color(0), 8);
       balls.add(eightBall);
@@ -194,7 +209,7 @@ void draw() {
 
     if (!eightBall.isOnBoard()) {
       isWon = true;
-      if (template==0) {
+      if (template!=1) {
         if (solidsTurn) {
           if (solidsSunk.size() == 7) {
             wonBy = 1;
@@ -234,8 +249,8 @@ void draw() {
       ball.getShape();
     }
     winScreen(wonBy);
-    if (keyboardInput.isPressed(3)) {
-      keyboardInput.release(3);
+    if (keyboardInput.isPressed(4)) {
+      keyboardInput.release(4);
       wonBy = -1;
       isWon = false;
       template = 0;

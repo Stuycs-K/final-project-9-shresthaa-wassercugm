@@ -11,7 +11,6 @@ boolean solidsTurn;
 boolean placeCue;
 boolean isWon;
 int wonBy;
-int count = 0;
 final int r = 16;
 
 // for drawing the table (dimensions)
@@ -91,12 +90,7 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (keyCode == '4' && count == 0) {
-    count = 1;
-  } else {
     keyboardInput.press(keyCode);
-    count = 0;
-  }
 }
 
 void keyReleased() {

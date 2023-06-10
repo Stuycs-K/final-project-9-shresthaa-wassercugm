@@ -115,3 +115,7 @@ Added the ability to place the cue ball back on the board if a player pocketed i
 ### 6/7/23
 
 Added the ability to win/lose the game when the 8 ball is pocketed.
+
+### 6/10/23
+
+Fixed bug with arrow changing size after game reset

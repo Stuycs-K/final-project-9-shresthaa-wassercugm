@@ -66,6 +66,10 @@ Completed display, and added more cheats using controller. Pressing 1 will lead 
 
 Completed the last cheat, which will bring player to a losing game if 3 is pressed(shooting in the 8-ball before all other balls of their color has been scored). Pressing 4 twice will restart the game(not 3 anymore). Revised Read Me to match these changes.
 
+### 6/10/23
+
+Changed reset control to pressing 4 once not twice or with delay.
+
 ## Maya
 
 ### 5/22/23

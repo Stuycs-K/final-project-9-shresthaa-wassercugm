@@ -22,4 +22,4 @@ group name: A(++++) Group
 
 5. Once all of the balls have stopped, you will be able to aim the cue ball again!
 
-PS: Press 2 to see a pre-designed template that sets up an easy endgame, and win the game by shooting the 8-ball into the hole. Press 3 to see another template which will allow you to lose. Press 1  to return to the normal game. Press 4 twice to restart the game after someone wins! An easy cheat for aiming is to press 0: while holding down 0, click anywhere on the table to place the cue ball there.
+PS: Press 2 to see a pre-designed template that sets up an easy endgame, and win the game by shooting the 8-ball into the hole. Press 3 to see another template which will allow you to lose. Press 1  to return to the normal game. Press 4 to restart the game after someone wins! An easy cheat for aiming is to press 0: while holding down 0, click anywhere on the table to place the cue ball there.

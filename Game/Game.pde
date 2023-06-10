@@ -105,13 +105,11 @@ void draw() {
 
   if (!isWon) {
     if (keyboardInput.isPressed(1)&&template!=0) {
-      keyboardInput.release(1);
       template = 0;
       drawBalls();
     }
 
     if (keyboardInput.isPressed(2)&&template!=1) {
-      keyboardInput.release(2);
       template = 1;
       balls = new ArrayList<Ball>();
       cue = new CueBall(border+boardWidth*3/4+100, border+boardHeight*3/4);
@@ -122,7 +120,6 @@ void draw() {
     }
 
     if (keyboardInput.isPressed(3)&&template!=2) {
-      keyboardInput.release(3);
       template = 2;
       balls = new ArrayList<Ball>();
       cue = new CueBall(border+boardWidth*3/4+150, border+boardHeight*3/4+50);
@@ -244,11 +241,11 @@ void draw() {
     }
     winScreen(wonBy);
     if (keyboardInput.isPressed(4)) {
-      keyboardInput.release(4);
       wonBy = -1;
       isWon = false;
       template = 0;
       drawBalls();
+      aimDirection = new PVector(0, 1).normalize();
     }
   }
 }

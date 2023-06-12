@@ -123,3 +123,21 @@ Added the ability to win/lose the game when the 8 ball is pocketed.
 ### 6/10/23
 
 Fixed bug with arrow changing size after game reset
+
+## Working features
+ * Accurate behavior of the balls (friction and collisions)
+ * Ability to aim the cue ball
+ * Ability to adjust strength of the shot
+ * Ability to fire the ball by pressing enter
+ * Balls can go into the 6 holes and disappear from the table (*)
+ * Turns alternate between two players (a player's turn continues if they pocketed one of their balls)
+ * Clicking to place the cue ball anywhere on the table if it has been pocketed by the other player
+ * Either player can win the game (either if they pocketed the 8 ball after all of their balls, or if the other player pocketed the 8 ball prematurely)
+ * Ball tracker that displays all balls still on the board
+ * Cheats (press 0 to place cue ball) and templates (press 2 and 3 for quick endgames)
+ * Restart after winning by pressing 4
+
+## Bugs
+ * Sometimes, instead of going into the hole and disappearing from the table, a ball will continue moving until its off the screen. You will be able to continue playing, but that player will not be able to win (the ball will not have registered as being pocketed). This does not happen often, but it usually happens with high velocity balls.
+
+## Content Resources
